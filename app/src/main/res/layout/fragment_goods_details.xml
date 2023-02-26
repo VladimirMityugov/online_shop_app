@@ -169,7 +169,7 @@
     
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="148dp"
         android:id="@+id/bottom_menu"
         android:background="@drawable/bottom_sheet_layout_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -183,6 +183,58 @@
             android:layout_marginStart="24dp"
             android:text="@string/quantity"
             android:textAppearance="@style/goods_details_quantity_text_style"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/minus_button"
+            android:layout_width="38dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="44dp"
+            android:background="@drawable/plus_minus_button_background"
+            android:text="-"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/plus_button"
+            android:layout_width="38dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="83dp"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="44dp"
+            android:background="@drawable/plus_minus_button_background"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_to_cart_button"
+            android:layout_width="170dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="83dp"
+            android:layout_marginTop="19dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="23dp"
+            android:background="@drawable/signin_login_button_background"
+            android:textAlignment="textEnd"
+            android:paddingEnd="30dp"
+            android:text="@string/add_to_cart"
+            android:textAppearance="@style/goods_details_add_to_cart_text_style"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="134dp"
+            android:layout_gravity="end"
+            android:text="@string/amount"
+            android:elevation="5dp"
+            android:textAppearance="@style/goods_details_amount_text_style"/>
 
 
 

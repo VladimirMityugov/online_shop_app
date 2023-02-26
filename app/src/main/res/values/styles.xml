@@ -194,4 +194,18 @@
         <item name="android:textColor">@color/myGrayGray</item>
     </style>
 
+    <style name="goods_details_add_to_cart_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="goods_details_amount_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/myUltraLightBlue</item>
+    </style>
+
 </resources>

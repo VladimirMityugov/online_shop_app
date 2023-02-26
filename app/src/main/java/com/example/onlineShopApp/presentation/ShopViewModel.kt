@@ -4,6 +4,7 @@ package com.example.onlineShopApp.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.onlineShopApp.data.local.entities.ViewedGoods
+import com.example.onlineShopApp.data.remote.goods_details.GoodsDetailsDto
 import com.example.onlineShopApp.data.remote.latest_goods.Latest
 import com.example.onlineShopApp.data.remote.sale_goods.Sale
 import com.example.onlineShopApp.domain.UseCaseDataBase
@@ -32,8 +33,8 @@ class ShopViewModel @Inject constructor(
     private val _hidePassword = MutableStateFlow(true)
     val hidePassword = _hidePassword.asStateFlow()
 
-    private val _currentUserName = MutableStateFlow<String?>(null)
-    val currentUserName = _currentUserName.asStateFlow()
+    private val _goodsDetails = MutableStateFlow<GoodsDetailsDto?>(null)
+    val goodsDetails = _goodsDetails.asStateFlow()
 
 
     init {
@@ -52,6 +53,12 @@ class ShopViewModel @Inject constructor(
     private fun getViewedGoods() {
         viewModelScope.launch {
             _viewedItems.value = useCaseNetwork.getViewedItems()
+        }
+    }
+
+    fun getGoodsDetails(){
+        viewModelScope.launch {
+            _goodsDetails.value = useCaseNetwork.getGoodsDetails()
         }
     }
 
@@ -83,12 +90,6 @@ class ShopViewModel @Inject constructor(
     fun changePasswordFieldSettings(hidePassword: Boolean) {
         viewModelScope.launch {
             _hidePassword.value = hidePassword
-        }
-    }
-
-    fun setUserName(name: String) {
-        viewModelScope.launch {
-            _currentUserName.value = name
         }
     }
 

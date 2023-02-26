@@ -6,7 +6,7 @@
     <string name="navigation_basket">Basket</string>
     <string name="navigation_messages">Messages</string>
     <string name="navigation_profile">Profile</string>
-    <string name="profile">PROFILE</string>
+    <string name="profile">Profile</string>
     <string name="messages">MESSAGES</string>
     <string name="basket">BASKET</string>
     <string name="favorites">FAVORITES</string>
@@ -30,6 +30,18 @@
     <string name="location">Location</string>
     <string name="query_hint">What are you looking for ?</string>
     <string name="brands">Brands</string>
+    <string name="change_photo">Change photo</string>
+    <string name="upload_item">Upload item</string>
+    <string name="trade_store">Trade store</string>
+    <string name="log_out">Log out</string>
+    <string name="help">Help</string>
+    <string name="restore_purchase">Restore purchase</string>
+    <string name="trade_history">Trade history</string>
+    <string name="balance">Balance</string>
+    <string name="payment_method">Payment method</string>
+    <string name="goods_description">goods_description</string>
+    <string name="color">Color :</string>
+    <string name="quantity">Quantity :</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 

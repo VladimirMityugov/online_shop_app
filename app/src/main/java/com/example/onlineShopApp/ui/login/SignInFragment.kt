@@ -151,7 +151,6 @@ class SignInFragment : Fragment() {
                     val user = authentification.currentUser
                     val profileUpdates = userProfileChangeRequest {
                         displayName = username
-                        viewModel.setUserName(username)
                     }
 
                     user!!.updateProfile(profileUpdates)

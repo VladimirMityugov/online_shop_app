@@ -1,21 +1,20 @@
 package com.example.onlineShopApp.ui.home
 
-import android.graphics.Color
+
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.text.style.TypefaceSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.R
@@ -27,7 +26,6 @@ import com.example.onlineShopApp.presentation.adapters.BrandsGoodsAdapter
 import com.example.onlineShopApp.presentation.adapters.CategoriesAdapter
 import com.example.onlineShopApp.presentation.adapters.GoodsAdapter
 import com.example.onlineShopApp.presentation.adapters.ViewedGoodsAdapter
-import com.example.onlineShopApp.presentation.utility.Categories
 import com.example.onlineShopApp.presentation.utility.CategoriesDataModel
 import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_IMAGE_URL
 import dagger.hilt.android.AndroidEntryPoint
@@ -248,11 +246,7 @@ class MainFragment : Fragment() {
     }
 
     private fun onSaleItemClick(goods: SaleGoodsDto) {
-        Toast.makeText(
-            requireContext(),
-            "Sale goods with name  : ${goods.name} is clicked",
-            Toast.LENGTH_SHORT
-        ).show()
+        shopViewModel.getGoodsDetails()
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             shopViewModel.insertIntoViewedGoods(
                 category = goods.category,
@@ -261,6 +255,7 @@ class MainFragment : Fragment() {
                 price = goods.price
             )
         }
+        findNavController().navigate(R.id.action_navigation_home_to_goodsDetailsFragment)
     }
 
     private fun onBrandsItemClick(goods: SaleGoodsDto) {

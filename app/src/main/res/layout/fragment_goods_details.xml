@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_goods_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    tools:context="com.example.onlineShopApp.ui.home.GoodsDetailsFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-5dp"
+        android:layout_marginTop="70dp"
+        app:cardCornerRadius="9dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/goods_picture"
+            android:layout_width="330dp"
+            android:layout_height="280dp"
+            android:scaleType="fitXY"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="64dp"
+        android:elevation="5dp"
+        android:src="@drawable/arrow_back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:layout_width="42dp"
+        android:layout_height="95dp"
+        android:layout_marginEnd="-21dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/favorites_share_button_background"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/card_view"
+        app:layout_constraintEnd_toEndOf="@id/card_view">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/favorites_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="17dp"
+            android:src="@drawable/large_heart_icon" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/line_icon" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="17dp"
+            android:src="@drawable/large_share_icon" />
+
+    </FrameLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_view" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/goods_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="22dp"
+        android:text="@string/goods_name"
+        android:textAppearance="@style/goods_details_name_text_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_pager" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/goods_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:text="$ 22,50"
+        android:textAppearance="@style/goods_details_price_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/goods_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/goods_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/goods_description"
+        android:textAppearance="@style/goods_details_description_text_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goods_name" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/star_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/star_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goods_description" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/goods_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="4.2"
+        android:textAppearance="@style/goods_details_rating_text_style"
+        app:layout_constraintBottom_toBottomOf="@id/star_icon"
+        app:layout_constraintStart_toEndOf="@id/star_icon"
+        app:layout_constraintTop_toTopOf="@id/star_icon" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/goods_reviews_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="(10000 reviews)"
+        android:textAppearance="@style/goods_details_description_text_style"
+        app:layout_constraintBottom_toBottomOf="@id/star_icon"
+        app:layout_constraintStart_toEndOf="@id/goods_rating"
+        app:layout_constraintTop_toTopOf="@id/star_icon" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="13dp"
+        android:text="@string/color"
+        android:id="@+id/color_text"
+        android:textAppearance="@style/goods_details_color_text_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/star_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="17dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/color_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/container_for_color_samples"/>
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:id="@+id/bottom_menu"
+        android:background="@drawable/bottom_sheet_layout_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/quantity"
+            android:textAppearance="@style/goods_details_quantity_text_style"/>
+
+
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

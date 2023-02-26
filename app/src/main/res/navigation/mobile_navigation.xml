@@ -9,7 +9,13 @@
         android:id="@+id/navigation_home"
         android:name="com.example.onlineShopApp.ui.home.MainFragment"
         android:label="@string/navigation_home"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_navigation_home_to_goodsDetailsFragment"
+            app:destination="@id/goodsDetailsFragment"
+            app:enterAnim="@anim/fui_slide_in_right"
+            app:exitAnim="@anim/fui_slide_in_right"/>
+    </fragment>
     <action
         android:id="@+id/action_global_navigation_home"
         app:destination="@id/navigation_home" />
@@ -47,6 +53,11 @@
         tools:layout="@layout/fragment_profile" />
     <action android:id="@+id/action_global_profileFragment"
         app:destination="@id/profileFragment"/>
+    <fragment
+        android:id="@+id/goodsDetailsFragment"
+        android:name="com.example.onlineShopApp.ui.home.GoodsDetailsFragment"
+        android:label="fragment_goods_details"
+        tools:layout="@layout/fragment_goods_details" />
 
 
 </navigation>

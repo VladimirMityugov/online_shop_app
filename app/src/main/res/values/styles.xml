@@ -103,6 +103,10 @@
         <item name="borderWidth">1dp</item>
     </style>
 
+    <style name="rounded_corners_image_style">
+        <item name="cornerSize">20%</item>
+    </style>
+
     <style name="location_text_style">
         <item name="fontFamily">@font/poppins_light</item>
         <item name="fontWeight">400</item>
@@ -132,5 +136,62 @@
         <item name="android:textColor">@color/myGrayGrayGrayGray</item>
     </style>
 
+    <style name="profile_title_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">700</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="change_photo_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/myGrayGray</item>
+    </style>
+
+    <style name="goods_details_name_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/myBlack</item>
+    </style>
+
+    <style name="goods_details_price_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/myBlack</item>
+    </style>
+
+    <style name="goods_details_description_text_style">
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="fontWeight">400</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">@color/myGrayGray</item>
+    </style>
+
+    <style name="goods_details_rating_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">@color/myBlack</item>
+    </style>
+
+    <style name="goods_details_color_text_style">
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/myGrayAgain</item>
+    </style>
+
+    <style name="goods_details_quantity_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">@color/myGrayGray</item>
+    </style>
 
 </resources>

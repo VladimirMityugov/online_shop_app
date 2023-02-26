@@ -26,5 +26,7 @@
     <color name="myGrayGrayGray">#F5F6F6</color>
     <color name="myGrayGrayGrayGray">#A6A7AB</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="myGrayForFavoritesShareBackground">#E5E9EF</color>
+    <color name="myGrayAgain">#737373</color>
 </resources>
 

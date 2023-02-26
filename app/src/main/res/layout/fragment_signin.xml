@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.onlineShopApp.ui.login.LoginFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sign_in_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="@string/sign_in_text_title"
+        android:textAppearance="@style/sign_in_title_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/first_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/input_field_background"
+        android:hint="@string/first_name_hint_text"
+        android:textAlignment="center"
+        android:textAppearance="@style/hint_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_title" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/last_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/input_field_background"
+        android:hint="@string/last_name_hint_text"
+        android:textAlignment="center"
+        android:textAppearance="@style/hint_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_name_field" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/email_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/input_field_background"
+        android:hint="@string/email_hint_text"
+        android:textAlignment="center"
+        android:textAppearance="@style/hint_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/last_name_field" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/signin_login_button_background"
+        android:text="@string/sign_in_text_title"
+        android:textAppearance="@style/sign_login_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_field" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/aux_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/already_have_an_account_text"
+        android:textAppearance="@style/aux_text_style"
+        app:layout_constraintEnd_toEndOf="@id/sign_in_button"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/sign_in_button"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_button" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/login_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/log_in_aux_text"
+        android:textAppearance="@style/aux_login_text_style"
+        app:layout_constraintBottom_toBottomOf="@id/aux_text"
+        app:layout_constraintStart_toEndOf="@id/aux_text"
+        app:layout_constraintTop_toTopOf="@id/aux_text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sign_with_google_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="107dp"
+        android:text="@string/sign_in_with_google_text"
+        android:textAppearance="@style/sign_with_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_button" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/google_sign"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/google_icon"
+        app:layout_constraintBottom_toBottomOf="@id/sign_with_google_text"
+        app:layout_constraintEnd_toStartOf="@id/sign_with_google_text"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sign_with_google_text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sign_with_apple_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="167dp"
+        android:text="@string/sign_in_with_apple_text"
+        android:textAppearance="@style/sign_with_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_button" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/apple_sign"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/apple_icon"
+        app:layout_constraintBottom_toBottomOf="@id/sign_with_apple_text"
+        app:layout_constraintEnd_toStartOf="@id/sign_with_apple_text"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sign_with_apple_text" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

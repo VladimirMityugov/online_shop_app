@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.onlineShopApp.ui.login.LoginFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/welcome_back_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="@string/welcome_back_text_title"
+        android:textAppearance="@style/sign_in_title_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/first_name_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/input_field_background"
+        android:hint="@string/first_name_hint_text"
+        android:textAlignment="center"
+        android:textAppearance="@style/hint_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_back_title" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/password_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/input_field_background"
+        android:hint="@string/password_hint_text"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textAppearance="@style/hint_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_name_field" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/eye_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/eye_icon_background"
+        app:layout_constraintBottom_toBottomOf="@id/password_field"
+        app:layout_constraintEnd_toEndOf="@id/password_field"
+        app:layout_constraintTop_toTopOf="@id/password_field" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/signin_login_button_background"
+        android:text="@string/login"
+        android:textAppearance="@style/sign_login_text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_field" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="sign_in_title_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/myBlack</item>
+    </style>
+
+    <style name="hint_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/myGrayForHint</item>
+    </style>
+
+    <style name="aux_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/myGrayGray</item>
+    </style>
+
+    <style name="aux_login_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/myLightBlue</item>
+    </style>
+
+    <style name="input_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/myBlack</item>
+    </style>
+
+    <style name="sign_login_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">700</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/myWhiteLight</item>
+    </style>
+
+    <style name="sign_with_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="collections_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="goods_categories_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">6sp</item>
+        <item name="android:textColor">@color/myBlackForCategories</item>
+    </style>
+
+    <style name="goods_name_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">@color/myRed</item>
+        //color??
+    </style>
+
+    <style name="view_all_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">9sp</item>
+        <item name="android:textColor">@color/myGrayGray</item>
+    </style>
+
+    <style name="discount_text_style">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="fontWeight">600</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="main_fragment_title_text_style">
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontWeight">700</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="circular_image_style">
+        <item name="cornerSize">50%</item>
+        <item name="borderWidth">1dp</item>
+    </style>
+
+    <style name="location_text_style">
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="fontWeight">400</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/myJustAnotherGray</item>
+    </style>
+
+    <style name="query_text_style">
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="fontWeight">400</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/myJustAnotherGray</item>
+    </style>
+
+    <style name="search_view_style" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@null</item>
+        <item name="searchHintIcon">@null</item>
+        <item name="searchIcon">@null</item>
+        <item name="clockIcon">@null</item>
+        <item name="android:textAppearance">@style/query_text_style</item>
+    </style>
+
+    <style name="categories_titles_text_style">
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="fontWeight">500</item>
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/myGrayGrayGrayGray</item>
+    </style>
+
+
+</resources>

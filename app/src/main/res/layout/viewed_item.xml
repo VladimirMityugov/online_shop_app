@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item"
+    android:layout_width="115dp"
+    android:layout_height="150dp"
+    android:layout_margin="6dp"
+    android:layout_marginEnd="8dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="9dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/goods_picture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="7dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/goods_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/category_background"
+                android:elevation="5dp"
+                android:text="@string/category"
+                android:textAppearance="@style/goods_categories_text_style"
+                app:layout_constraintBottom_toTopOf="@id/goods_name"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/goods_name"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:minHeight="27dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:text="@string/goods_name"
+                android:textAppearance="@style/goods_name_text_style"
+                app:layout_constraintBottom_toTopOf="@id/goods_price"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/goods_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 10,000"
+                android:textAppearance="@style/goods_name_text_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/add_to_basket_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/plus_icon_background"
+                android:src="@drawable/small_plus_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/category_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/category_picture_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@drawable/category_picture_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:id="@+id/category_picture"
+        tools:src="@tools:sample/avatars"
+        app:layout_constraintStart_toStartOf="@id/category_picture_background"
+        app:layout_constraintEnd_toEndOf="@id/category_picture_background"
+        app:layout_constraintTop_toTopOf="@id/category_picture_background"
+        app:layout_constraintBottom_toBottomOf="@id/category_picture_background"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/category_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="Phones"
+        android:textAppearance="@style/categories_titles_text_style"
+        app:layout_constraintEnd_toEndOf="@id/category_picture_background"
+        app:layout_constraintStart_toStartOf="@id/category_picture_background"
+        app:layout_constraintTop_toBottomOf="@id/category_picture_background" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

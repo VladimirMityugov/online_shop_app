@@ -1,28 +1,11 @@
 # Easy shopping
 ### Buy everything you need, even if you are CAPTAIN JACK SPARROW. Available in English and Russian
 
-**Onboarding**
-<p align="left">
-<img src="https://user-images.githubusercontent.com/118269028/216333814-6fa7c71f-643b-45c5-9d1c-c799aeb7269e.gif" width=30% height=30%>
- </p>
-
 **Main Tab**
+
 <p align="left">
-<img src="https://user-images.githubusercontent.com/118269028/216337128-ddf6d3c0-b68a-46f2-b19a-6871f71832d8.gif" width=30% height=30%>
+<img src="https://user-images.githubusercontent.com/118269028/222277424-43d8bae0-0c28-4a5d-9871-b72130e462f7.jpg" width=30% height=30%>
  </p>
-
-**Search Tab**
-<p align="left">
-<img src="https://user-images.githubusercontent.com/118269028/216338045-2ebf3cf7-95d7-4a38-aa65-4dd000740915.gif" width=30% height=30%>
- </p>
-
-**Profile Tab**
-<p align="left">
-<img src="https://user-images.githubusercontent.com/118269028/216339008-80cd33d0-1960-466e-888d-89490e55e375.gif" width=30% height=30%>
- </p>
-
-Welcome ViewPager with short app presentation
-
 
 <p align="left">
 <img src="https://user-images.githubusercontent.com/118269028/222276896-f72f3d65-fbf3-4932-8e55-d56cfa643df5.jpg" width=30% height=30%>

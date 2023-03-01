@@ -23,8 +23,6 @@ import com.example.onlineShopApp.presentation.adapters.GoodsPicturesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-private const val TAG = "DETAILS"
-
 @AndroidEntryPoint
 class GoodsDetailsFragment : Fragment() {
 
@@ -221,6 +219,20 @@ class GoodsDetailsFragment : Fragment() {
 
     private fun onFavoritesButtonClick() {
         Toast.makeText(requireContext(), "Favorites button is clicked", Toast.LENGTH_SHORT).show()
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            shopViewModel.goodsDetails.collectLatest {goodsDetails ->
+                shopViewModel.selectedGoods.collectLatest { selectedGoods ->
+                    if(goodsDetails!=null && goodsDetails.name == selectedGoods){
+                        shopViewModel.insertIntoFavoriteGoods(
+                            category = null,
+                            image_url = goodsDetails.image_urls.firstOrNull(),
+                            name = goodsDetails.name,
+                            price = goodsDetails.price
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun onBackButtonClick() {

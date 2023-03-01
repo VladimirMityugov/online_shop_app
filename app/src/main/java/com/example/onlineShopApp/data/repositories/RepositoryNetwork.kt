@@ -5,6 +5,7 @@ import com.example.onlineShopApp.data.remote.ShopApi
 import com.example.onlineShopApp.data.remote.goods_details.GoodsDetailsDto
 import com.example.onlineShopApp.data.remote.latest_goods.Latest
 import com.example.onlineShopApp.data.remote.sale_goods.Sale
+import com.example.onlineShopApp.data.remote.search_result.Results
 import javax.inject.Inject
 
 
@@ -22,6 +23,10 @@ class RepositoryNetwork @Inject constructor(
 
     suspend fun getGoodsDetails(): GoodsDetailsDto{
         return shopApi.getGoodsDetails()
+    }
+
+    suspend fun getSearchResults():Results{
+        return shopApi.getSearchResults()
     }
 
 

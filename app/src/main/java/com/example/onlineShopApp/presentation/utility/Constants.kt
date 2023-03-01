@@ -5,10 +5,12 @@ import android.os.Build
 
 
 object Constants {
-
+    const val RU = "ru"
+    const val EN = "en"
     const val PASSWORD = "password"
     const val JACK_SPARROW_IMAGE_URL =
         "https://w0.peakpx.com/wallpaper/458/418/HD-wallpaper-captain-jack-sparrow-fantasy-luminos-man-face-mark-armstrong-rand-johnny-depp.jpg"
+    const val JACK_SPARROW_NAME = "CAPTAIN JACK SPARROW"
     const val SCALE_VALUE_FOR_ANIMATION = 1.5F
     const val TRANSLATION_VALUE_INITIAL_FOR_ANIMATION = 0F
     const val TRANSLATION_VALUE_FINAL_FOR_ANIMATION = 20F

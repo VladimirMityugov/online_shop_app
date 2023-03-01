@@ -3,7 +3,9 @@ package com.example.onlineShopApp.data.remote
 import com.example.onlineShopApp.data.remote.goods_details.GoodsDetailsDto
 import com.example.onlineShopApp.data.remote.latest_goods.Latest
 import com.example.onlineShopApp.data.remote.sale_goods.Sale
+import com.example.onlineShopApp.data.remote.search_result.Results
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ShopApi {
 
@@ -15,6 +17,9 @@ interface ShopApi {
 
     @GET("v3/f7f99d04-4971-45d5-92e0-70333383c239")
     suspend fun getGoodsDetails(): GoodsDetailsDto
+
+    @GET("v3/4c9cd822-9479-4509-803d-63197e5a9e19")
+    suspend fun getSearchResults(): Results
 
 
     companion object {

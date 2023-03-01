@@ -4,10 +4,12 @@ package com.example.onlineShopApp.presentation
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.onlineShopApp.data.local.entities.FavoriteGoods
 import com.example.onlineShopApp.data.local.entities.ViewedGoods
 import com.example.onlineShopApp.data.remote.goods_details.GoodsDetailsDto
 import com.example.onlineShopApp.data.remote.latest_goods.Latest
 import com.example.onlineShopApp.data.remote.sale_goods.Sale
+import com.example.onlineShopApp.data.remote.search_result.Results
 import com.example.onlineShopApp.domain.UseCaseDataBase
 import com.example.onlineShopApp.domain.UseCaseNetwork
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +17,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "VIEW_MODEL"
 
 @HiltViewModel
 class ShopViewModel @Inject constructor(
@@ -49,12 +50,19 @@ class ShopViewModel @Inject constructor(
     private val _selectedUserPhoto = MutableStateFlow<Uri?>(null)
     val selectedUserPhoto = _selectedUserPhoto.asStateFlow()
 
+    private val _searchResults = MutableStateFlow<Results?>(null)
+    val searchResults = _searchResults.asStateFlow()
+
+    private val _selectedGoods = MutableStateFlow<String?>("")
+    val selectedGoods = _selectedGoods.asStateFlow()
+
 
 
 
     init {
         getSaleGoods()
         getViewedGoods()
+        getSearchedResults()
     }
 
     // Network calls
@@ -77,6 +85,12 @@ class ShopViewModel @Inject constructor(
         }
     }
 
+    private fun getSearchedResults(){
+        viewModelScope.launch {
+            _searchResults.value = useCaseNetwork.getSearchResults()
+        }
+    }
+
 //DataBaseQueries
 
     fun getAllViewedGoods(): Flow<List<ViewedGoods>> = useCaseDataBase.getAllViewedGoods()
@@ -90,6 +104,26 @@ class ShopViewModel @Inject constructor(
         viewModelScope.launch {
             useCaseDataBase.insertIntoViewedGoods(
                 viewedGoods = ViewedGoods(
+                    category = category,
+                    image_url = image_url,
+                    name = name,
+                    price = price
+                )
+            )
+        }
+    }
+
+    fun getAllFavoriteGoods(): Flow<List<FavoriteGoods>> = useCaseDataBase.getAllFavoriteGoods()
+
+    suspend fun insertIntoFavoriteGoods(
+        category: String?,
+        image_url: String?,
+        name: String,
+        price: Double
+    ) {
+        viewModelScope.launch {
+            useCaseDataBase.insertIntoFavoriteGoods(
+                favoriteGoods = FavoriteGoods(
                     category = category,
                     image_url = image_url,
                     name = name,
@@ -136,14 +170,16 @@ class ShopViewModel @Inject constructor(
         }
     }
 
+    fun selectGoods(goodsName:String){
+        viewModelScope.launch {
+            _selectedGoods.value = goodsName
+        }
+    }
+
     fun selectUserPhoto(uri: Uri){
         viewModelScope.launch {
             _selectedUserPhoto.value = uri
         }
-    }
-
-    companion object {
-
     }
 }
 

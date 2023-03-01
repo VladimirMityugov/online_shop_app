@@ -33,6 +33,10 @@ object Module {
     @ViewModelScoped
     fun provideShopDao(dataBase: ShopDataBase) = dataBase.shopDao()
 
+    @Provides
+    @ViewModelScoped
+    fun provideFavoritesDao(dataBase: ShopDataBase) = dataBase.favoritesDao()
+
 
     @Provides
     @ViewModelScoped

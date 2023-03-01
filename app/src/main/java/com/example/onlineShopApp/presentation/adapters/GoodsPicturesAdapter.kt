@@ -1,6 +1,5 @@
 package com.example.onlineShopApp.presentation.adapters
 
-
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.view.LayoutInflater
@@ -19,9 +18,6 @@ import com.example.onlineShopApp.presentation.utility.Constants.ELEVATION_VALUE_
 import com.example.onlineShopApp.presentation.utility.Constants.SCALE_VALUE_FOR_ANIMATION
 import com.example.onlineShopApp.presentation.utility.Constants.TRANSLATION_VALUE_FINAL_FOR_ANIMATION
 import com.example.onlineShopApp.presentation.utility.Constants.TRANSLATION_VALUE_INITIAL_FOR_ANIMATION
-
-
-private const val TAG = "ADAPTER"
 
 class GoodsPicturesAdapter(
     private val onPictureClick: (String) -> Unit
@@ -91,7 +87,11 @@ class PicturesViewHolder(
     fun animateItem(view: View) {
         val scaleX = PropertyValuesHolder.ofFloat("scaleX", SCALE_VALUE_FOR_ANIMATION)
         val scaleY = PropertyValuesHolder.ofFloat("scaleY", SCALE_VALUE_FOR_ANIMATION)
-        val translationY = PropertyValuesHolder.ofFloat("translationY", TRANSLATION_VALUE_INITIAL_FOR_ANIMATION, TRANSLATION_VALUE_FINAL_FOR_ANIMATION)
+        val translationY = PropertyValuesHolder.ofFloat(
+            "translationY",
+            TRANSLATION_VALUE_INITIAL_FOR_ANIMATION,
+            TRANSLATION_VALUE_FINAL_FOR_ANIMATION
+        )
         val elevation = PropertyValuesHolder.ofFloat("elevation", ELEVATION_VALUE_FOR_ANIMATION)
         val animator =
             ObjectAnimator.ofPropertyValuesHolder(view, scaleX, scaleY, translationY, elevation)

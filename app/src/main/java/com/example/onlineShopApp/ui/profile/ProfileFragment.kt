@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.databinding.FragmentProfileBinding
 import com.example.onlineShopApp.presentation.ShopViewModel
 import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_IMAGE_URL
+import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_NAME
 import com.example.onlineShopApp.presentation.utility.Constants.REQUIRED_PERMISSIONS
 import com.example.onlineShopApp.presentation.utility.hasReadPermission
 import com.example.onlineShopApp.ui.LoginActivity
@@ -97,9 +98,8 @@ class ProfileFragment : Fragment() {
             }
         }
 
-
-        userName.text = firebaseAuth.currentUser?.displayName
-
+        userName.text =
+            if (firebaseAuth.currentUser != null) firebaseAuth.currentUser!!.displayName.toString() else JACK_SPARROW_NAME
 
         logOutText.setOnClickListener {
             onSignOutClick()
@@ -148,6 +148,7 @@ class ProfileFragment : Fragment() {
             dialogLauncher()
         }
     }
+
     private fun dialogLauncher() {
         permissionLauncher.launch(REQUIRED_PERMISSIONS)
     }

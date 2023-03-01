@@ -1,6 +1,5 @@
 package com.example.onlineShopApp.ui.home
 
-
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -8,6 +7,8 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -31,9 +32,6 @@ import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_IMA
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-
-private const val TAG = "MAIN_FRAGMENT"
-
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
@@ -47,10 +45,10 @@ class MainFragment : Fragment() {
     private lateinit var menu: AppCompatImageView
     private lateinit var avatar: AppCompatImageView
     private lateinit var mainTitle: AppCompatTextView
-    private lateinit var searchView: androidx.appcompat.widget.SearchView
     private lateinit var locationChangeButton: AppCompatImageView
     private lateinit var viewAllLatest: AppCompatTextView
     private lateinit var viewAllSale: AppCompatTextView
+    private lateinit var autoCompleteTextView:AutoCompleteTextView
     private var categoriesDataModel = CategoriesDataModel(null, null)
 
     private val saleGoodsAdapter = GoodsAdapter(
@@ -74,8 +72,6 @@ class MainFragment : Fragment() {
         onAddFavoriteButtonClick = { goods -> onAddToFavoriteClick(goods) },
         onBrandsItemCLick = { goods -> onBrandsItemClick(goods) }
     )
-
-
 
 
     private val shopViewModel: ShopViewModel by activityViewModels()
@@ -106,11 +102,20 @@ class MainFragment : Fragment() {
         menu = binding.menu
         avatar = binding.avatar
         mainTitle = binding.mainTitle
-        searchView = binding.searchView
         locationChangeButton = binding.locationChangeButton
         viewAllLatest = binding.showAllLatest
         viewAllSale = binding.showAllSale
+        autoCompleteTextView = binding.searchView
 
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            shopViewModel.searchResults.collectLatest { searchResults ->
+                if(searchResults !=null){
+                    val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_list_item_1, searchResults.words)
+                    autoCompleteTextView.setAdapter(adapter)
+                }
+            }
+        }
 
         viewAllLatest.setOnClickListener {
             onViewAllLatestClick()
@@ -131,13 +136,13 @@ class MainFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             shopViewModel.selectedUserPhoto.collectLatest { uri ->
-                if(uri !=null){
+                if (uri != null) {
                     Glide
                         .with(avatar)
                         .load(uri)
                         .circleCrop()
                         .into(avatar)
-                }else{
+                } else {
                     Glide
                         .with(avatar)
                         .load(JACK_SPARROW_IMAGE_URL)
@@ -261,6 +266,7 @@ class MainFragment : Fragment() {
 
     private fun onSaleItemClick(goods: SaleGoodsDto) {
         shopViewModel.getGoodsDetails()
+        shopViewModel.selectGoods(goods.name)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             shopViewModel.insertIntoViewedGoods(
                 category = goods.category,

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.databinding.ViewedItemBinding
-import com.example.onlineShopApp.data.local.entities.ViewedGoods
 import com.example.onlineShopApp.data.remote.latest_goods.LatestGoodsDto
 
 

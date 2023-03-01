@@ -21,15 +21,14 @@
 <img src="https://user-images.githubusercontent.com/118269028/216339008-80cd33d0-1960-466e-888d-89490e55e375.gif" width=30% height=30%>
  </p>
 
-<details><summary>Welcome ViewPager with short app presentation</summary>
-<p>
+Welcome ViewPager with short app presentation
+
 
 <p align="left">
-<img src="https://user-images.githubusercontent.com/118269028/216302754-19adeaac-4429-4deb-b9a4-16e4718ca9e8.jpg" width=30% height=30%>
+<img src="https://user-images.githubusercontent.com/118269028/222276896-f72f3d65-fbf3-4932-8e55-d56cfa643df5.jpg" width=30% height=30%>
  </p>
 
-</p>
-</details>
+
 
 <details><summary>Main tab. Premiers selection for upcoming 2 weeks from current date, "eye" icon for already watched movies</summary>
 <p>

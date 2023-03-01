@@ -1,6 +1,16 @@
 # Easy shopping
 ### Buy everything you need, even if you are CAPTAIN JACK SPARROW. Available in English and Russian
 
+**Main screen**
+<p align="left">
+<img src="https://user-images.githubusercontent.com/118269028/222280867-7b1231a1-8ebe-4c29-9acc-23e20c2b45ab.gif" width=30% height=30%>
+ </p>
+ 
+ **Details screen**
+<p align="left">
+<img src="https://user-images.githubusercontent.com/118269028/222280867-7b1231a1-8ebe-4c29-9acc-23e20c2b45ab.gif" width=30% height=30%>
+ </p>
+
 **Profile tab**
  
  <p align="left">

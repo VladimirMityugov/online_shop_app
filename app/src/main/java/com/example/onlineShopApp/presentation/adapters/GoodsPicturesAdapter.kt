@@ -61,7 +61,7 @@ class GoodsPicturesAdapter(
     companion object {
         const val LARGE = 1
         const val NORMAL = 0
-        private var SELECTED_ITEM = RecyclerView.NO_POSITION
+        private var SELECTED_ITEM = 0
     }
 
 

@@ -23,7 +23,7 @@
  **Sign in available the different ways**
 
 <p align="left">
-<img src="https://user-images.githubusercontent.com/118269028/222276896-f72f3d65-fbf3-4932-8e55-d56cfa643df5.jpg" width=30% height=30%>
+<img src="https://user-images.githubusercontent.com/118269028/222277028-3d17378e-5561-49ad-b4ae-91cbfccdb58d.jpg" width=30% height=30%>
  </p>
  
  

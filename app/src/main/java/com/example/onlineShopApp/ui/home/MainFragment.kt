@@ -129,11 +129,23 @@ class MainFragment : Fragment() {
             onMenuClick()
         }
 
-        Glide
-            .with(this)
-            .load(JACK_SPARROW_IMAGE_URL)
-            .circleCrop()
-            .into(avatar)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            shopViewModel.selectedUserPhoto.collectLatest { uri ->
+                if(uri !=null){
+                    Glide
+                        .with(avatar)
+                        .load(uri)
+                        .circleCrop()
+                        .into(avatar)
+                }else{
+                    Glide
+                        .with(avatar)
+                        .load(JACK_SPARROW_IMAGE_URL)
+                        .circleCrop()
+                        .into(avatar)
+                }
+            }
+        }
 
         val mainTitleSpan = SpannableString(mainTitle.text)
         val startIndex = mainTitleSpan.indexOf("bata")
@@ -162,6 +174,8 @@ class MainFragment : Fragment() {
         }
 
         categoriesAdapter.submitList(categoriesDataModel.getItemsList())
+
+        //Display items, previously saved into DB
 
 //        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 //            shopViewModel.getAllViewedGoods().collectLatest { allViewed ->

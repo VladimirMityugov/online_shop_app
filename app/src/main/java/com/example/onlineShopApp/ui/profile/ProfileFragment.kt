@@ -1,12 +1,12 @@
 package com.example.onlineShopApp.ui.profile
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -15,16 +15,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.databinding.FragmentProfileBinding
-import com.example.onlineShopApp.data.remote.sale_goods.SaleGoodsDto
 import com.example.onlineShopApp.presentation.ShopViewModel
-import com.example.onlineShopApp.presentation.adapters.GoodsAdapter
-import com.example.onlineShopApp.presentation.utility.Constants
 import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_IMAGE_URL
-import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_NAME
+import com.example.onlineShopApp.presentation.utility.Constants.REQUIRED_PERMISSIONS
+import com.example.onlineShopApp.presentation.utility.hasReadPermission
 import com.example.onlineShopApp.ui.LoginActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -41,6 +41,22 @@ class ProfileFragment : Fragment() {
     private lateinit var backButton: AppCompatImageView
 
     private val shopViewModel: ShopViewModel by activityViewModels()
+
+    private val photoPickerLauncher = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        if (uri != null) {
+            shopViewModel.selectUserPhoto(uri)
+        }
+    }
+
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            if (it.values.all { true }) {
+                photoPickerLauncher
+            }
+        }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,12 +78,24 @@ class ProfileFragment : Fragment() {
         userPhoto = binding.avatar
         backButton = binding.backButton
 
-        Glide
-            .with(this)
-            .load(JACK_SPARROW_IMAGE_URL)
-            .circleCrop()
-            .into(userPhoto)
 
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            shopViewModel.selectedUserPhoto.collectLatest { uri ->
+                if (uri != null) {
+                    Glide
+                        .with(userPhoto)
+                        .load(uri)
+                        .circleCrop()
+                        .into(userPhoto)
+                } else {
+                    Glide
+                        .with(userPhoto)
+                        .load(JACK_SPARROW_IMAGE_URL)
+                        .circleCrop()
+                        .into(userPhoto)
+                }
+            }
+        }
 
 
         userName.text = firebaseAuth.currentUser?.displayName
@@ -89,7 +117,6 @@ class ProfileFragment : Fragment() {
             onBackButtonClick()
         }
 
-
     }
 
     private fun onBackButtonClick() {
@@ -97,12 +124,32 @@ class ProfileFragment : Fragment() {
     }
 
     private fun onChangePhotoClick() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivity(intent)
-//registerForActivityResult(ActivityResultContracts.PickVisualMedia()){
-//
-//}
+        if (requireContext().hasReadPermission()) {
+            photoPickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        } else {
+            requestPermissions()
+        }
+    }
+
+    private fun requestPermissions() {
+        if (shouldShowRequestPermissionRationale(REQUIRED_PERMISSIONS[0])) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Read permission dialog")
+                .setMessage("To upload image, please accept read external storage permission")
+                .setPositiveButton("OK", DialogInterface.OnClickListener { _, _ ->
+                    dialogLauncher()
+                })
+                .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, _ ->
+                    dialog.dismiss()
+                })
+                .create()
+                .show()
+        } else {
+            dialogLauncher()
+        }
+    }
+    private fun dialogLauncher() {
+        permissionLauncher.launch(REQUIRED_PERMISSIONS)
     }
 
     private fun onSignOutClick() {

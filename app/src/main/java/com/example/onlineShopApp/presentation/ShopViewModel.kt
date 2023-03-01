@@ -1,6 +1,7 @@
 package com.example.onlineShopApp.presentation
 
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.onlineShopApp.data.local.entities.ViewedGoods
@@ -36,6 +37,20 @@ class ShopViewModel @Inject constructor(
     private val _goodsDetails = MutableStateFlow<GoodsDetailsDto?>(null)
     val goodsDetails = _goodsDetails.asStateFlow()
 
+    private val _currentGoodsQuantity = MutableStateFlow(0)
+    val currentGoodsQuantity = _currentGoodsQuantity.asStateFlow()
+
+    private val _selectedColor = MutableStateFlow<String?>(null)
+    val selectedColor = _selectedColor.asStateFlow()
+
+    private val _selectedPicture = MutableStateFlow<String?>(null)
+    val selectedPicture = _selectedPicture.asStateFlow()
+
+    private val _selectedUserPhoto = MutableStateFlow<Uri?>(null)
+    val selectedUserPhoto = _selectedUserPhoto.asStateFlow()
+
+
+
 
     init {
         getSaleGoods()
@@ -56,7 +71,7 @@ class ShopViewModel @Inject constructor(
         }
     }
 
-    fun getGoodsDetails(){
+    fun getGoodsDetails() {
         viewModelScope.launch {
             _goodsDetails.value = useCaseNetwork.getGoodsDetails()
         }
@@ -90,6 +105,40 @@ class ShopViewModel @Inject constructor(
     fun changePasswordFieldSettings(hidePassword: Boolean) {
         viewModelScope.launch {
             _hidePassword.value = hidePassword
+        }
+    }
+
+    fun incrementGoodsQuantity() {
+        viewModelScope.launch {
+            val currentQuantityStatus = _currentGoodsQuantity.value
+            _currentGoodsQuantity.value = currentQuantityStatus + 1
+        }
+    }
+
+    fun decrementGoodsQuantity() {
+        viewModelScope.launch {
+            val currentQuantityStatus = _currentGoodsQuantity.value
+            if (currentQuantityStatus > 0) {
+                _currentGoodsQuantity.value = currentQuantityStatus - 1
+            }
+        }
+    }
+
+    fun selectColor(color:String){
+        viewModelScope.launch {
+            _selectedColor.value = color
+        }
+    }
+
+    fun selectPicture(picture:String){
+        viewModelScope.launch {
+            _selectedPicture.value = picture
+        }
+    }
+
+    fun selectUserPhoto(uri: Uri){
+        viewModelScope.launch {
+            _selectedUserPhoto.value = uri
         }
     }
 

@@ -6,6 +6,6 @@ data class GoodsDetailsDto(
     val image_urls: List<String>,
     val name: String,
     val number_of_reviews: Int,
-    val price: Int,
+    val price: Double,
     val rating: Double
 )

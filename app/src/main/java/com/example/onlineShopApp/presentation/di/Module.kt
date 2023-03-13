@@ -1,6 +1,6 @@
-package com.example.onlineShopApp.data.di
+package com.example.onlineShopApp.presentation.di
 
-import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.example.onlineShopApp.data.local.ShopDataBase
 import com.example.onlineShopApp.data.remote.ShopApi
@@ -9,37 +9,38 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Singleton
 
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 object Module {
 
     @Provides
-    @ViewModelScoped
-    fun provideMovieDatabase(app: Application): ShopDataBase {
+    @Singleton
+    fun provideMovieDatabase(@ApplicationContext context: Context): ShopDataBase {
         return Room.databaseBuilder(
-            app.applicationContext,
+            context,
             ShopDataBase::class.java,
-            "movieDataBase"
+            "shopDataBase"
         ).build()
     }
 
     @Provides
-    @ViewModelScoped
+    @Singleton
     fun provideShopDao(dataBase: ShopDataBase) = dataBase.shopDao()
 
     @Provides
-    @ViewModelScoped
+    @Singleton
     fun provideFavoritesDao(dataBase: ShopDataBase) = dataBase.favoritesDao()
 
 
     @Provides
-    @ViewModelScoped
+    @Singleton
     fun provideShopApi(): ShopApi {
 
         val moshi = Moshi.Builder()

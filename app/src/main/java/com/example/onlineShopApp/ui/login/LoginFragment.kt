@@ -9,38 +9,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.AppCompatImageButton
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.FragmentLoginBinding
-import com.example.onlineShopApp.presentation.ShopViewModel
-import com.example.onlineShopApp.presentation.utility.Constants
+import com.example.onlineShopApp.presentation.view_models.ShopViewModel
 import com.example.onlineShopApp.presentation.utility.Constants.PASSWORD
 import com.example.onlineShopApp.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-@AndroidEntryPoint
+
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var firstName: AppCompatEditText
-    private lateinit var password: AppCompatEditText
-    private lateinit var loginButton: AppCompatButton
-    private lateinit var eyeIcon: AppCompatImageView
     private lateinit var authentification: FirebaseAuth
     private var hidePassword = true
-
 
     private val viewModel: ShopViewModel by activityViewModels()
 
@@ -55,11 +40,13 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        eyeIcon = binding.eyeIcon
-        firstName = binding.firstNameField
-        password = binding.passwordField
-        loginButton = binding.loginButton
+
+        val firstName = binding.firstNameField
+        val password = binding.passwordField
+        val eyeIcon = binding.eyeIcon
+
         authentification = FirebaseAuth.getInstance()
+
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.hidePassword.collectLatest { hidePassword ->
@@ -80,10 +67,10 @@ class LoginFragment : Fragment() {
             }
         }
 
-        loginButton.setOnClickListener {
-            val firstName =
+        binding.loginButton.setOnClickListener {
+            val name =
                 firstName.text.toString()
-            onLoginButtonCLick(firstName, PASSWORD)
+            onLoginButtonCLick(name, PASSWORD)
 
         }
 

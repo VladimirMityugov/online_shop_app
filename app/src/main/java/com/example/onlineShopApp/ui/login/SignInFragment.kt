@@ -10,24 +10,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.FragmentSigninBinding
-import com.example.onlineShopApp.presentation.ShopViewModel
-import com.example.onlineShopApp.presentation.utility.Constants
+import com.example.onlineShopApp.presentation.view_models.ShopViewModel
 import com.example.onlineShopApp.presentation.utility.Constants.PASSWORD
 import com.example.onlineShopApp.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
-import dagger.hilt.android.AndroidEntryPoint
+
 
 private const val TAG = "SIGN_IN_FRAGMENT"
-@AndroidEntryPoint
+
 class SignInFragment : Fragment() {
 
     private var _binding: FragmentSigninBinding? = null
@@ -36,15 +31,8 @@ class SignInFragment : Fragment() {
     private lateinit var firstName: AppCompatEditText
     private lateinit var lastName: AppCompatEditText
     private lateinit var email: AppCompatEditText
-    private lateinit var signInButton: AppCompatButton
-    private lateinit var loginButton: AppCompatTextView
-    private lateinit var signInWithGoogle: AppCompatTextView
-    private lateinit var signInWithApple: AppCompatTextView
-    private lateinit var googleSign: AppCompatImageView
-    private lateinit var appleSign: AppCompatImageView
     private lateinit var authentification: FirebaseAuth
     private lateinit var username: String
-
 
     private val viewModel: ShopViewModel by activityViewModels()
 
@@ -62,36 +50,30 @@ class SignInFragment : Fragment() {
         firstName = binding.firstNameField
         lastName = binding.lastNameField
         email = binding.emailField
-        loginButton = binding.loginText
-        signInButton = binding.signInButton
-        signInWithApple = binding.signWithAppleText
-        signInWithGoogle = binding.signWithGoogleText
-        googleSign = binding.googleSign
-        appleSign = binding.appleSign
 
         authentification = FirebaseAuth.getInstance()
 
-        googleSign.setOnClickListener {
+        binding.googleSign.setOnClickListener {
             onGoogleSignClick()
         }
 
-        signInWithGoogle.setOnClickListener {
+        binding.signWithGoogleText.setOnClickListener {
             onGoogleSignClick()
         }
 
-        appleSign.setOnClickListener {
+        binding.appleSign.setOnClickListener {
             onAppleSignClick()
         }
 
-        signInWithApple.setOnClickListener {
+        binding.signWithAppleText.setOnClickListener {
             onAppleSignClick()
         }
 
-        signInButton.setOnClickListener {
+        binding.signInButton.setOnClickListener {
             onSignInButtonClick()
         }
 
-        loginButton.setOnClickListener {
+        binding.loginText.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_login, LoginFragment.newInstance())
                 .addToBackStack("SIGN_IN")
@@ -100,13 +82,13 @@ class SignInFragment : Fragment() {
     }
 
     private fun onSignInButtonClick() {
-        val firstName = firstName.text.toString().trim().lowercase().replaceFirstChar { it.uppercaseChar() }
-        val lastName = lastName.text.toString().trim().lowercase().replaceFirstChar { it.uppercaseChar() }
+        val name = firstName.text.toString().trim().lowercase().replaceFirstChar { it.uppercaseChar() }
+        val surname = lastName.text.toString().trim().lowercase().replaceFirstChar { it.uppercaseChar() }
         val emailInput = email.text.toString().trim().lowercase()
         val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
         when {
-            TextUtils.isEmpty(firstName) ->
+            TextUtils.isEmpty(name) ->
                 Toast.makeText(
                     requireContext(),
                     "Please, enter name",
@@ -119,7 +101,7 @@ class SignInFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-            TextUtils.isEmpty(lastName) ->
+            TextUtils.isEmpty(surname) ->
                 Toast.makeText(
                     requireContext(),
                     "Please, enter last name",

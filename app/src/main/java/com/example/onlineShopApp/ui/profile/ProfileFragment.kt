@@ -1,6 +1,5 @@
 package com.example.onlineShopApp.ui.profile
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.databinding.FragmentProfileBinding
-import com.example.onlineShopApp.presentation.ShopViewModel
+import com.example.onlineShopApp.presentation.view_models.ShopViewModel
 import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_IMAGE_URL
 import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_NAME
 import com.example.onlineShopApp.presentation.utility.Constants.REQUIRED_PERMISSIONS
@@ -23,23 +20,15 @@ import com.example.onlineShopApp.presentation.utility.hasReadPermission
 import com.example.onlineShopApp.ui.LoginActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 
-@AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var changePhoto: AppCompatTextView
-    private lateinit var logOutSign: AppCompatImageView
-    private lateinit var logOutText: AppCompatTextView
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var userName: AppCompatTextView
-    private lateinit var userPhoto: AppCompatImageView
-    private lateinit var backButton: AppCompatImageView
 
     private val shopViewModel: ShopViewModel by activityViewModels()
 
@@ -58,7 +47,6 @@ class ProfileFragment : Fragment() {
             }
         }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,14 +59,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        changePhoto = binding.changePhoto
-        logOutSign = binding.logoutPicture
-        logOutText = binding.logoutText
         firebaseAuth = FirebaseAuth.getInstance()
-        userName = binding.userName
-        userPhoto = binding.avatar
-        backButton = binding.backButton
-
+        val userPhoto = binding.avatar
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             shopViewModel.selectedUserPhoto.collectLatest { uri ->
@@ -98,22 +80,22 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        userName.text =
+        binding.userName.text =
             if (firebaseAuth.currentUser != null) firebaseAuth.currentUser!!.displayName.toString() else JACK_SPARROW_NAME
 
-        logOutText.setOnClickListener {
+        binding.logoutText.setOnClickListener {
             onSignOutClick()
         }
 
-        logOutSign.setOnClickListener {
+        binding.logoutPicture.setOnClickListener {
             onSignOutClick()
         }
 
-        changePhoto.setOnClickListener {
+        binding.changePhoto.setOnClickListener {
             onChangePhotoClick()
         }
 
-        backButton.setOnClickListener {
+        binding.backButton.setOnClickListener {
             onBackButtonClick()
         }
 
@@ -136,12 +118,12 @@ class ProfileFragment : Fragment() {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Read permission dialog")
                 .setMessage("To upload image, please accept read external storage permission")
-                .setPositiveButton("OK", DialogInterface.OnClickListener { _, _ ->
+                .setPositiveButton("OK") { _, _ ->
                     dialogLauncher()
-                })
-                .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, _ ->
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
                     dialog.dismiss()
-                })
+                }
                 .create()
                 .show()
         } else {

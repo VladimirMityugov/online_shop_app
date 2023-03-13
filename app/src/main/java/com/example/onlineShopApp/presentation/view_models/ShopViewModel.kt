@@ -1,17 +1,17 @@
-package com.example.onlineShopApp.presentation
+package com.example.onlineShopApp.presentation.view_models
 
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.onlineShopApp.data.local.entities.FavoriteGoods
-import com.example.onlineShopApp.data.local.entities.ViewedGoods
-import com.example.onlineShopApp.data.remote.goods_details.GoodsDetailsDto
-import com.example.onlineShopApp.data.remote.latest_goods.Latest
-import com.example.onlineShopApp.data.remote.sale_goods.Sale
-import com.example.onlineShopApp.data.remote.search_result.Results
-import com.example.onlineShopApp.domain.UseCaseDataBase
-import com.example.onlineShopApp.domain.UseCaseNetwork
+import com.example.onlineShopApp.domain.models.favorite_goods_model.FavoriteGoodsModel
+import com.example.onlineShopApp.domain.models.latest_goods_model.LatestModel
+import com.example.onlineShopApp.domain.models.sale_goods_model.SaleModel
+import com.example.onlineShopApp.domain.models.goods_details_model.GoodsDetailsModel
+import com.example.onlineShopApp.domain.models.search_result_model.ResultsModel
+import com.example.onlineShopApp.domain.models.viewed_goods_model.ViewedGoodsModel
+import com.example.onlineShopApp.domain.use_cases.UseCaseDataBase
+import com.example.onlineShopApp.domain.use_cases.UseCaseNetwork
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -26,16 +26,16 @@ class ShopViewModel @Inject constructor(
 
     // Variables
 
-    private val _items = MutableStateFlow<Sale?>(null)
+    private val _items = MutableStateFlow<SaleModel?>(null)
     val items = _items.asStateFlow()
 
-    private val _viewedItems = MutableStateFlow<Latest?>(null)
+    private val _viewedItems = MutableStateFlow<LatestModel?>(null)
     val viewedItems = _viewedItems.asStateFlow()
 
     private val _hidePassword = MutableStateFlow(true)
     val hidePassword = _hidePassword.asStateFlow()
 
-    private val _goodsDetails = MutableStateFlow<GoodsDetailsDto?>(null)
+    private val _goodsDetails = MutableStateFlow<GoodsDetailsModel?>(null)
     val goodsDetails = _goodsDetails.asStateFlow()
 
     private val _currentGoodsQuantity = MutableStateFlow(0)
@@ -50,14 +50,11 @@ class ShopViewModel @Inject constructor(
     private val _selectedUserPhoto = MutableStateFlow<Uri?>(null)
     val selectedUserPhoto = _selectedUserPhoto.asStateFlow()
 
-    private val _searchResults = MutableStateFlow<Results?>(null)
+    private val _searchResults = MutableStateFlow<ResultsModel?>(null)
     val searchResults = _searchResults.asStateFlow()
 
     private val _selectedGoods = MutableStateFlow<String?>("")
     val selectedGoods = _selectedGoods.asStateFlow()
-
-
-
 
     init {
         getSaleGoods()
@@ -69,7 +66,7 @@ class ShopViewModel @Inject constructor(
 
     private fun getSaleGoods() {
         viewModelScope.launch {
-            _items.value = useCaseNetwork.getItems()
+            _items.value = useCaseNetwork.getSaleItems()
         }
     }
 
@@ -93,7 +90,7 @@ class ShopViewModel @Inject constructor(
 
 //DataBaseQueries
 
-    fun getAllViewedGoods(): Flow<List<ViewedGoods>> = useCaseDataBase.getAllViewedGoods()
+    fun getAllViewedGoods(): Flow<List<ViewedGoodsModel>> = useCaseDataBase.getAllViewedGoods()
 
     suspend fun insertIntoViewedGoods(
         category: String,
@@ -103,7 +100,7 @@ class ShopViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             useCaseDataBase.insertIntoViewedGoods(
-                viewedGoods = ViewedGoods(
+                viewedGoodsModel = ViewedGoodsModel(
                     category = category,
                     image_url = image_url,
                     name = name,
@@ -113,7 +110,7 @@ class ShopViewModel @Inject constructor(
         }
     }
 
-    fun getAllFavoriteGoods(): Flow<List<FavoriteGoods>> = useCaseDataBase.getAllFavoriteGoods()
+    fun getAllFavoriteGoods(): Flow<List<FavoriteGoodsModel>> = useCaseDataBase.getAllFavoriteGoods()
 
     suspend fun insertIntoFavoriteGoods(
         category: String?,
@@ -123,7 +120,7 @@ class ShopViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             useCaseDataBase.insertIntoFavoriteGoods(
-                favoriteGoods = FavoriteGoods(
+                favoriteGoodsModel = FavoriteGoodsModel(
                     category = category,
                     image_url = image_url,
                     name = name,

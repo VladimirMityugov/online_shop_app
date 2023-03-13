@@ -7,20 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.chocky_development.onlineShopApp.databinding.FragmentFavoritesBinding
-import com.example.onlineShopApp.data.remote.sale_goods.SaleGoodsDto
-import com.example.onlineShopApp.presentation.ShopViewModel
-import com.example.onlineShopApp.presentation.adapters.GoodsAdapter
+import com.example.onlineShopApp.domain.models.sale_goods_model.SaleGoods
+import com.example.onlineShopApp.presentation.view_models.ShopViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class FavoritesFragment : Fragment() {
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
-
-
-
-
 
     private val shopViewModel: ShopViewModel by activityViewModels()
 
@@ -35,14 +30,10 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 
-    private fun onItemClick(saleGoodsDto: SaleGoodsDto) {
-
+    private fun onItemClick(saleGoods: SaleGoods) {
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

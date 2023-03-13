@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.FragmentMainBinding
-import com.example.onlineShopApp.data.remote.latest_goods.LatestGoodsDto
-import com.example.onlineShopApp.data.remote.sale_goods.SaleGoodsDto
-import com.example.onlineShopApp.presentation.ShopViewModel
+import com.example.onlineShopApp.domain.models.latest_goods_model.LatestGoods
+import com.example.onlineShopApp.domain.models.sale_goods_model.SaleGoods
+import com.example.onlineShopApp.presentation.view_models.ShopViewModel
 import com.example.onlineShopApp.presentation.adapters.BrandsGoodsAdapter
 import com.example.onlineShopApp.presentation.adapters.CategoriesAdapter
 import com.example.onlineShopApp.presentation.adapters.GoodsAdapter
@@ -38,17 +38,6 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewedRecyclerView: RecyclerView
-    private lateinit var saleRecyclerView: RecyclerView
-    private lateinit var categoriesRecyclerView: RecyclerView
-    private lateinit var brandsRecyclerView: RecyclerView
-    private lateinit var menu: AppCompatImageView
-    private lateinit var avatar: AppCompatImageView
-    private lateinit var mainTitle: AppCompatTextView
-    private lateinit var locationChangeButton: AppCompatImageView
-    private lateinit var viewAllLatest: AppCompatTextView
-    private lateinit var viewAllSale: AppCompatTextView
-    private lateinit var autoCompleteTextView:AutoCompleteTextView
     private var categoriesDataModel = CategoriesDataModel(null, null)
 
     private val saleGoodsAdapter = GoodsAdapter(
@@ -56,7 +45,6 @@ class MainFragment : Fragment() {
         onAddFavoriteButtonClick = { goods -> onAddToFavoriteClick(goods) },
         onSaleItemCLick = { goods -> onSaleItemClick(goods) }
     )
-
 
     private val viewedGoodsAdapter = ViewedGoodsAdapter(
         onGoodsItemClick = { goods -> onViewedItemClick(goods) },
@@ -73,7 +61,6 @@ class MainFragment : Fragment() {
         onBrandsItemCLick = { goods -> onBrandsItemClick(goods) }
     )
 
-
     private val shopViewModel: ShopViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -88,49 +75,46 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewedRecyclerView = binding.latestRecyclerView
-        saleRecyclerView = binding.saleRecyclerView
-        categoriesRecyclerView = binding.categoriesRecyclerView
-        brandsRecyclerView = binding.brandsRecyclerView
+        val viewedRecyclerView = binding.latestRecyclerView
+        val saleRecyclerView = binding.saleRecyclerView
+        val categoriesRecyclerView = binding.categoriesRecyclerView
+        val brandsRecyclerView = binding.brandsRecyclerView
 
         viewedRecyclerView.adapter = viewedGoodsAdapter
         saleRecyclerView.adapter = saleGoodsAdapter
         categoriesRecyclerView.adapter = categoriesAdapter
         brandsRecyclerView.adapter = brandsGoodsAdapter
 
-
-        menu = binding.menu
-        avatar = binding.avatar
-        mainTitle = binding.mainTitle
-        locationChangeButton = binding.locationChangeButton
-        viewAllLatest = binding.showAllLatest
-        viewAllSale = binding.showAllSale
-        autoCompleteTextView = binding.searchView
-
+        val avatar = binding.avatar
+        val mainTitle = binding.mainTitle
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             shopViewModel.searchResults.collectLatest { searchResults ->
-                if(searchResults !=null){
-                    val adapter = ArrayAdapter(requireContext(),android.R.layout.simple_list_item_1, searchResults.words)
-                    autoCompleteTextView.setAdapter(adapter)
+                if (searchResults != null) {
+                    val adapter = ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_list_item_1,
+                        searchResults.words
+                    )
+                    binding.searchView.setAdapter(adapter)
                 }
             }
         }
 
-        viewAllLatest.setOnClickListener {
+        binding.showAllLatest.setOnClickListener {
             onViewAllLatestClick()
         }
 
-        viewAllSale.setOnClickListener {
+        binding.showAllSale.setOnClickListener {
             onViewAllSaleCLick()
         }
 
-        locationChangeButton.setOnClickListener {
+        binding.locationChangeButton.setOnClickListener {
             onLocationChangeClick()
         }
 
 
-        menu.setOnClickListener {
+        binding.menu.setOnClickListener {
             onMenuClick()
         }
 
@@ -163,8 +147,6 @@ class MainFragment : Fragment() {
         )
 
         mainTitle.text = mainTitleSpan
-
-
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             shopViewModel.viewedItems.collectLatest { viewedItems ->
@@ -232,7 +214,7 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onAddToFavoriteClick(goods: SaleGoodsDto) {
+    private fun onAddToFavoriteClick(goods: SaleGoods) {
         Toast.makeText(
             requireContext(),
             "Add to favorites goods with name : ${goods.name}",
@@ -240,7 +222,7 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onAddToBasketClick(goods: SaleGoodsDto) {
+    private fun onAddToBasketClick(goods: SaleGoods) {
         Toast.makeText(
             requireContext(),
             "Add to basket goods with name  : ${goods.name}",
@@ -248,7 +230,7 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onViewedItemClick(goods: LatestGoodsDto) {
+    private fun onViewedItemClick(goods: LatestGoods) {
         Toast.makeText(
             requireContext(),
             "Viewed goods with name  : ${goods.name} is clicked",
@@ -256,7 +238,7 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onAddViewedToBasketClick(goods: LatestGoodsDto) {
+    private fun onAddViewedToBasketClick(goods: LatestGoods) {
         Toast.makeText(
             requireContext(),
             "Add to basket goods with name  : ${goods.name}",
@@ -264,7 +246,7 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onSaleItemClick(goods: SaleGoodsDto) {
+    private fun onSaleItemClick(goods: SaleGoods) {
         shopViewModel.getGoodsDetails()
         shopViewModel.selectGoods(goods.name)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -278,7 +260,7 @@ class MainFragment : Fragment() {
         findNavController().navigate(R.id.action_navigation_home_to_goodsDetailsFragment)
     }
 
-    private fun onBrandsItemClick(goods: SaleGoodsDto) {
+    private fun onBrandsItemClick(goods: SaleGoods) {
         Toast.makeText(
             requireContext(),
             "Brands goods with name  : ${goods.name} is clicked",

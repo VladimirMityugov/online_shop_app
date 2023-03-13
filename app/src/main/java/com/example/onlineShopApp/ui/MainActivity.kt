@@ -1,13 +1,7 @@
 package com.example.onlineShopApp.ui
 
-
-import android.app.Dialog
 import android.os.Bundle
-import android.view.Gravity
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -17,11 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 
-
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -39,8 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         navController = findNavController(R.id.nav_host_fragment_activity_main)
-
-
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -64,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

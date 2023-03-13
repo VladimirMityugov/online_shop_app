@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import com.example.onlineShopApp.presentation.utility.Constants.REQUIRED_PERMISSIONS
 
-
 fun Context.hasReadPermission(): Boolean {
 
     return REQUIRED_PERMISSIONS.all { permission ->

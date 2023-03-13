@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.databinding.ViewedItemBinding
-import com.example.onlineShopApp.data.remote.latest_goods.LatestGoodsDto
+import com.example.onlineShopApp.domain.models.latest_goods_model.LatestGoods
 
 
 class ViewedGoodsAdapter(
-    private val onGoodsItemClick: (LatestGoodsDto) -> Unit,
-    private val onAddToBasketClick: (LatestGoodsDto) -> Unit
+    private val onGoodsItemClick: (LatestGoods) -> Unit,
+    private val onAddToBasketClick: (LatestGoods) -> Unit
 ) :
-    ListAdapter<LatestGoodsDto, ViewedGoodsViewHolder>(DiffUtilCallBackViewedGoods()) {
+    ListAdapter<LatestGoods, ViewedGoodsViewHolder>(DiffUtilCallBackViewedGoods()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewedGoodsViewHolder {
         return ViewedGoodsViewHolder(
@@ -38,11 +38,11 @@ class ViewedGoodsAdapter(
 
 class ViewedGoodsViewHolder(
     private val binding: ViewedItemBinding,
-    val onItemClick: (LatestGoodsDto) -> Unit,
-    val onAddToBasketClick: (LatestGoodsDto) -> Unit
+    val onItemClick: (LatestGoods) -> Unit,
+    val onAddToBasketClick: (LatestGoods) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: LatestGoodsDto) {
+    fun bind(item: LatestGoods) {
         with(binding) {
             val remainder = (item.price * 100).toInt()
             goodsCategory.text = item.category
@@ -71,12 +71,12 @@ class ViewedGoodsViewHolder(
     }
 }
 
-class DiffUtilCallBackViewedGoods : DiffUtil.ItemCallback<LatestGoodsDto>() {
-    override fun areItemsTheSame(oldItem: LatestGoodsDto, newItem: LatestGoodsDto): Boolean {
+class DiffUtilCallBackViewedGoods : DiffUtil.ItemCallback<LatestGoods>() {
+    override fun areItemsTheSame(oldItem: LatestGoods, newItem: LatestGoods): Boolean {
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: LatestGoodsDto, newItem: LatestGoodsDto): Boolean {
+    override fun areContentsTheSame(oldItem: LatestGoods, newItem: LatestGoods): Boolean {
         return oldItem == newItem
     }
 }

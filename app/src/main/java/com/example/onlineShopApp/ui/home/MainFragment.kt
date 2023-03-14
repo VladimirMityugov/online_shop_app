@@ -8,20 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.chocky_development.domain_.models.latest_goods_model.LatestGoodsModel
+import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
+import com.chocky_development.domain_.models.viewed_goods_model.ViewedGoodsModel
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.FragmentMainBinding
-import com.example.onlineShopApp.domain.models.latest_goods_model.LatestGoods
-import com.example.onlineShopApp.domain.models.sale_goods_model.SaleGoods
 import com.example.onlineShopApp.presentation.view_models.ShopViewModel
 import com.example.onlineShopApp.presentation.adapters.BrandsGoodsAdapter
 import com.example.onlineShopApp.presentation.adapters.CategoriesAdapter
@@ -29,8 +26,10 @@ import com.example.onlineShopApp.presentation.adapters.GoodsAdapter
 import com.example.onlineShopApp.presentation.adapters.ViewedGoodsAdapter
 import com.example.onlineShopApp.presentation.utility.CategoriesDataModel
 import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_IMAGE_URL
+import com.example.onlineShopApp.presentation.view_models.GoodsDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -62,6 +61,7 @@ class MainFragment : Fragment() {
     )
 
     private val shopViewModel: ShopViewModel by activityViewModels()
+    private val goodsDetailsViewModel: GoodsDetailsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -151,10 +151,10 @@ class MainFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             shopViewModel.viewedItems.collectLatest { viewedItems ->
                 shopViewModel.items.collectLatest { saleItems ->
-                    if (viewedItems != null && saleItems != null) {
-                        viewedGoodsAdapter.submitList(viewedItems.latest)
-                        saleGoodsAdapter.submitList(saleItems.flash_sale)
-                        brandsGoodsAdapter.submitList(saleItems.flash_sale)
+                                 if (viewedItems.isNotEmpty() && saleItems.isNotEmpty()) {
+                        viewedGoodsAdapter.submitList(viewedItems)
+                        saleGoodsAdapter.submitList(saleItems)
+                        brandsGoodsAdapter.submitList(saleItems)
                     }
                 }
             }
@@ -169,8 +169,6 @@ class MainFragment : Fragment() {
 //                viewedGoodsAdapter.submitList(allViewed)
 //            }
 //        }
-
-
     }
 
 
@@ -214,7 +212,7 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onAddToFavoriteClick(goods: SaleGoods) {
+    private fun onAddToFavoriteClick(goods: SaleGoodsModel) {
         Toast.makeText(
             requireContext(),
             "Add to favorites goods with name : ${goods.name}",
@@ -222,7 +220,7 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onAddToBasketClick(goods: SaleGoods) {
+    private fun onAddToBasketClick(goods: SaleGoodsModel) {
         Toast.makeText(
             requireContext(),
             "Add to basket goods with name  : ${goods.name}",
@@ -230,7 +228,7 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onViewedItemClick(goods: LatestGoods) {
+    private fun onViewedItemClick(goods: LatestGoodsModel) {
         Toast.makeText(
             requireContext(),
             "Viewed goods with name  : ${goods.name} is clicked",
@@ -238,7 +236,7 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onAddViewedToBasketClick(goods: LatestGoods) {
+    private fun onAddViewedToBasketClick(goods: LatestGoodsModel) {
         Toast.makeText(
             requireContext(),
             "Add to basket goods with name  : ${goods.name}",
@@ -246,21 +244,22 @@ class MainFragment : Fragment() {
         ).show()
     }
 
-    private fun onSaleItemClick(goods: SaleGoods) {
-        shopViewModel.getGoodsDetails()
-        shopViewModel.selectGoods(goods.name)
+    private fun onSaleItemClick(goods: SaleGoodsModel) {
+        goodsDetailsViewModel.selectGoods(goods.name)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             shopViewModel.insertIntoViewedGoods(
-                category = goods.category,
-                image_url = goods.image_url,
-                name = goods.name,
-                price = goods.price
+               ViewedGoodsModel(
+                    category = goods.category,
+                    image_url = goods.image_url,
+                    name = goods.name,
+                    price = goods.price
+                )
             )
         }
         findNavController().navigate(R.id.action_navigation_home_to_goodsDetailsFragment)
     }
 
-    private fun onBrandsItemClick(goods: SaleGoods) {
+    private fun onBrandsItemClick(goods: SaleGoodsModel) {
         Toast.makeText(
             requireContext(),
             "Brands goods with name  : ${goods.name} is clicked",

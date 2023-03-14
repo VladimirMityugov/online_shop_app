@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
 import com.chocky_development.onlineShopApp.databinding.FragmentFavoritesBinding
-import com.example.onlineShopApp.domain.models.sale_goods_model.SaleGoods
 import com.example.onlineShopApp.presentation.view_models.ShopViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 
 class FavoritesFragment : Fragment() {
@@ -32,7 +31,7 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun onItemClick(saleGoods: SaleGoods) {
+    private fun onItemClick(saleGoodsModel: SaleGoodsModel) {
     }
 
     override fun onDestroyView() {

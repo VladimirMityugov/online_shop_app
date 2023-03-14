@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.ItemBinding
-import com.example.onlineShopApp.domain.models.sale_goods_model.SaleGoods
+import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
 
 
 class BrandsGoodsAdapter(
-    private val onAddFavoriteButtonClick: (SaleGoods) -> Unit,
-    private val onAddToBasketButtonClick: (SaleGoods) -> Unit,
-    private val onBrandsItemCLick: (SaleGoods) -> Unit
+    private val onAddFavoriteButtonClick: (SaleGoodsModel) -> Unit,
+    private val onAddToBasketButtonClick: (SaleGoodsModel) -> Unit,
+    private val onBrandsItemCLick: (SaleGoodsModel) -> Unit
 ) :
-    ListAdapter<SaleGoods, BrandsGoodsViewHolder>(DiffUtilCallBackGoods()) {
+    ListAdapter<SaleGoodsModel, BrandsGoodsViewHolder>(DiffUtilCallBackGoods()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrandsGoodsViewHolder {
         return BrandsGoodsViewHolder(
@@ -40,12 +40,12 @@ class BrandsGoodsAdapter(
 
 class BrandsGoodsViewHolder(
     private val binding: ItemBinding,
-    val onAddFavoriteButtonClick: (SaleGoods) -> Unit,
-    val onAddToBasketButtonClick: (SaleGoods) -> Unit,
-    val onBrandsItemCLick: (SaleGoods) -> Unit
+    val onAddFavoriteButtonClick: (SaleGoodsModel) -> Unit,
+    val onAddToBasketButtonClick: (SaleGoodsModel) -> Unit,
+    val onBrandsItemCLick: (SaleGoodsModel) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: SaleGoods) {
+    fun bind(item: SaleGoodsModel) {
         with(binding) {
             val remainder = (item.price * 100).toInt()
             goodsName.text = item.name

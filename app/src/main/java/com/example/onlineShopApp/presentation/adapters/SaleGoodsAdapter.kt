@@ -8,15 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.ItemBinding
-import com.example.onlineShopApp.domain.models.sale_goods_model.SaleGoods
+import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
 
 
 class GoodsAdapter(
-    private val onAddFavoriteButtonClick: (SaleGoods) -> Unit,
-    private val onAddToBasketButtonClick: (SaleGoods) -> Unit,
-    private val onSaleItemCLick: (SaleGoods) -> Unit
+    private val onAddFavoriteButtonClick: (SaleGoodsModel) -> Unit,
+    private val onAddToBasketButtonClick: (SaleGoodsModel) -> Unit,
+    private val onSaleItemCLick: (SaleGoodsModel) -> Unit
 ) :
-    ListAdapter<SaleGoods, GoodsViewHolder>(DiffUtilCallBackGoods()) {
+    ListAdapter<SaleGoodsModel, GoodsViewHolder>(DiffUtilCallBackGoods()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsViewHolder {
         return GoodsViewHolder(
@@ -41,12 +41,12 @@ class GoodsAdapter(
 
 class GoodsViewHolder(
     private val binding: ItemBinding,
-    val onAddFavoriteButtonClick: (SaleGoods) -> Unit,
-    val onAddToBasketButtonClick: (SaleGoods) -> Unit,
-    val onSaleItemCLick: (SaleGoods) -> Unit
+    val onAddFavoriteButtonClick: (SaleGoodsModel) -> Unit,
+    val onAddToBasketButtonClick: (SaleGoodsModel) -> Unit,
+    val onSaleItemCLick: (SaleGoodsModel) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: SaleGoods) {
+    fun bind(item: SaleGoodsModel) {
         with(binding) {
             val remainder = (item.price * 100).toInt()
             goodsName.text = item.name
@@ -84,12 +84,12 @@ class GoodsViewHolder(
     }
 }
 
-class DiffUtilCallBackGoods : DiffUtil.ItemCallback<SaleGoods>() {
-    override fun areItemsTheSame(oldItem: SaleGoods, newItem: SaleGoods): Boolean {
+class DiffUtilCallBackGoods : DiffUtil.ItemCallback<SaleGoodsModel>() {
+    override fun areItemsTheSame(oldItem: SaleGoodsModel, newItem: SaleGoodsModel): Boolean {
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: SaleGoods, newItem: SaleGoods): Boolean {
+    override fun areContentsTheSame(oldItem: SaleGoodsModel, newItem: SaleGoodsModel): Boolean {
         return oldItem == newItem
     }
 }

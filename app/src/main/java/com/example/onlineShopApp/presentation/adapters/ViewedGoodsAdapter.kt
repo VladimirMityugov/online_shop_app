@@ -6,15 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.chocky_development.domain_.models.latest_goods_model.LatestGoodsModel
 import com.chocky_development.onlineShopApp.databinding.ViewedItemBinding
-import com.example.onlineShopApp.domain.models.latest_goods_model.LatestGoods
+
 
 
 class ViewedGoodsAdapter(
-    private val onGoodsItemClick: (LatestGoods) -> Unit,
-    private val onAddToBasketClick: (LatestGoods) -> Unit
+    private val onGoodsItemClick: (LatestGoodsModel) -> Unit,
+    private val onAddToBasketClick: (LatestGoodsModel) -> Unit
 ) :
-    ListAdapter<LatestGoods, ViewedGoodsViewHolder>(DiffUtilCallBackViewedGoods()) {
+    ListAdapter<LatestGoodsModel, ViewedGoodsViewHolder>(DiffUtilCallBackViewedGoods()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewedGoodsViewHolder {
         return ViewedGoodsViewHolder(
@@ -38,11 +39,11 @@ class ViewedGoodsAdapter(
 
 class ViewedGoodsViewHolder(
     private val binding: ViewedItemBinding,
-    val onItemClick: (LatestGoods) -> Unit,
-    val onAddToBasketClick: (LatestGoods) -> Unit
+    val onItemClick: (LatestGoodsModel) -> Unit,
+    val onAddToBasketClick: (LatestGoodsModel) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: LatestGoods) {
+    fun bind(item: LatestGoodsModel) {
         with(binding) {
             val remainder = (item.price * 100).toInt()
             goodsCategory.text = item.category
@@ -71,12 +72,12 @@ class ViewedGoodsViewHolder(
     }
 }
 
-class DiffUtilCallBackViewedGoods : DiffUtil.ItemCallback<LatestGoods>() {
-    override fun areItemsTheSame(oldItem: LatestGoods, newItem: LatestGoods): Boolean {
+class DiffUtilCallBackViewedGoods : DiffUtil.ItemCallback<LatestGoodsModel>() {
+    override fun areItemsTheSame(oldItem: LatestGoodsModel, newItem: LatestGoodsModel): Boolean {
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: LatestGoods, newItem: LatestGoods): Boolean {
+    override fun areContentsTheSame(oldItem: LatestGoodsModel, newItem: LatestGoodsModel): Boolean {
         return oldItem == newItem
     }
 }

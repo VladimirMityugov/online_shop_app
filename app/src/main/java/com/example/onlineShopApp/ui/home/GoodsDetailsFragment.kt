@@ -11,10 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.chocky_development.domain_.models.favorite_goods_model.FavoriteGoodsModel
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.FragmentGoodsDetailsBinding
-import com.example.onlineShopApp.presentation.view_models.ShopViewModel
 import com.example.onlineShopApp.presentation.adapters.GoodsPicturesAdapter
+import com.example.onlineShopApp.presentation.view_models.GoodsDetailsViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 
@@ -27,7 +28,7 @@ class GoodsDetailsFragment : Fragment() {
         onPictureClick = { picture -> onGoodsPictureClick(picture) }
     )
 
-    private val shopViewModel: ShopViewModel by activityViewModels()
+private val goodsDetailsViewModel: GoodsDetailsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,9 +71,15 @@ class GoodsDetailsFragment : Fragment() {
             onAddToCartButtonClick()
         }
 
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            goodsDetailsViewModel.selectedGoods.collectLatest {goodsName ->
+                if(goodsName!=null)goodsDetailsViewModel.getGoodsDetails()
+            }
+        }
+
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            shopViewModel.goodsDetails.collectLatest { goodsDetails ->
+            goodsDetailsViewModel.goodsDetails.collectLatest { goodsDetails ->
                 if (goodsDetails != null) {
                     for (color in goodsDetails.colors) {
                         binding.containerForColorSamples.addView(inflateColorSampleView(color))
@@ -102,8 +109,8 @@ class GoodsDetailsFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            shopViewModel.currentGoodsQuantity.collectLatest { quantity ->
-                shopViewModel.goodsDetails.collectLatest { goodsDetails ->
+            goodsDetailsViewModel.currentGoodsQuantity.collectLatest { quantity ->
+                goodsDetailsViewModel.goodsDetails.collectLatest { goodsDetails ->
                     if (goodsDetails != null) {
                         binding.goodsQuantity.text = quantity.toString()
                         val total = quantity * goodsDetails.price
@@ -118,7 +125,7 @@ class GoodsDetailsFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            shopViewModel.selectedPicture.collectLatest { picture ->
+            goodsDetailsViewModel.selectedPicture.collectLatest { picture ->
                 if (picture != null) {
                     Glide
                         .with(goodsPicture)
@@ -132,11 +139,11 @@ class GoodsDetailsFragment : Fragment() {
 
 
     private fun onGoodsPictureClick(picture: String) {
-        shopViewModel.selectPicture(picture)
+        goodsDetailsViewModel.selectPicture(picture)
     }
 
     private fun onAddToCartButtonClick() {
-        if (shopViewModel.currentGoodsQuantity.value == 0) {
+        if (goodsDetailsViewModel.currentGoodsQuantity.value == 0) {
             Toast.makeText(requireContext(), "Please, increase goods quantity", Toast.LENGTH_SHORT)
                 .show()
         } else {
@@ -164,11 +171,11 @@ class GoodsDetailsFragment : Fragment() {
     }
 
     private fun onMinusButtonClick() {
-        shopViewModel.decrementGoodsQuantity()
+        goodsDetailsViewModel.decrementGoodsQuantity()
     }
 
     private fun onPlusButtonClick() {
-        shopViewModel.incrementGoodsQuantity()
+        goodsDetailsViewModel.incrementGoodsQuantity()
     }
 
     private fun onShareButtonCLick() {
@@ -178,14 +185,16 @@ class GoodsDetailsFragment : Fragment() {
     private fun onFavoritesButtonClick() {
         Toast.makeText(requireContext(), "Favorites button is clicked", Toast.LENGTH_SHORT).show()
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            shopViewModel.goodsDetails.collectLatest { goodsDetails ->
-                shopViewModel.selectedGoods.collectLatest { selectedGoods ->
+            goodsDetailsViewModel.goodsDetails.collectLatest { goodsDetails ->
+                goodsDetailsViewModel.selectedGoods.collectLatest { selectedGoods ->
                     if (goodsDetails != null && goodsDetails.name == selectedGoods) {
-                        shopViewModel.insertIntoFavoriteGoods(
-                            category = null,
-                            image_url = goodsDetails.image_urls.firstOrNull(),
-                            name = goodsDetails.name,
-                            price = goodsDetails.price
+                        goodsDetailsViewModel.insertIntoFavoriteGoods(
+                            FavoriteGoodsModel(
+                                category = null,
+                                image_url = goodsDetails.image_urls.firstOrNull(),
+                                name = goodsDetails.name,
+                                price = goodsDetails.price
+                            )
                         )
                     }
                 }
@@ -203,7 +212,7 @@ class GoodsDetailsFragment : Fragment() {
         colorSample.setBackgroundColor(Color.parseColor(color))
         colorSampleView.setOnClickListener {
             Toast.makeText(requireContext(), "Color $color is clicked", Toast.LENGTH_SHORT).show()
-            shopViewModel.selectColor(color)
+            goodsDetailsViewModel.selectColor(color)
         }
         return colorSampleView
     }

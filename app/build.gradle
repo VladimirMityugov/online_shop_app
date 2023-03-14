@@ -48,12 +48,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.fragment:fragment:1.5.5'
+    implementation project(path: ':domain')
 
-    //ViewPager
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation project (path: ':data')
 
-    //Circle Indicator
-    implementation 'me.relex:circleindicator:2.1.6'
 
     //Fragment
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
@@ -66,14 +64,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
 
-    //Swipe
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     //RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-
-    //PagingLibrary
-    implementation 'androidx.paging:paging-runtime:3.1.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -105,9 +98,6 @@ dependencies {
     implementation 'com.squareup.moshi:moshi:1.13.0'
     implementation 'com.squareup.moshi:moshi-adapters:1.13.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
-
-    //DataStore
-    implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
     //LifeCycle
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'

@@ -1,22 +1,19 @@
 package com.example.onlineShopApp.presentation.view_models
 
-
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.onlineShopApp.domain.models.favorite_goods_model.FavoriteGoodsModel
-import com.example.onlineShopApp.domain.models.latest_goods_model.LatestModel
-import com.example.onlineShopApp.domain.models.sale_goods_model.SaleModel
-import com.example.onlineShopApp.domain.models.goods_details_model.GoodsDetailsModel
-import com.example.onlineShopApp.domain.models.search_result_model.ResultsModel
-import com.example.onlineShopApp.domain.models.viewed_goods_model.ViewedGoodsModel
-import com.example.onlineShopApp.domain.use_cases.UseCaseDataBase
-import com.example.onlineShopApp.domain.use_cases.UseCaseNetwork
+import com.chocky_development.domain_.models.favorite_goods_model.FavoriteGoodsModel
+import com.chocky_development.domain_.models.latest_goods_model.LatestGoodsModel
+import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
+import com.chocky_development.domain_.models.search_result_model.ResultsModel
+import com.chocky_development.domain_.models.viewed_goods_model.ViewedGoodsModel
+import com.chocky_development.domain_.use_cases.UseCaseDataBase
+import com.chocky_development.domain_.use_cases.UseCaseNetwork
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @HiltViewModel
 class ShopViewModel @Inject constructor(
@@ -26,35 +23,20 @@ class ShopViewModel @Inject constructor(
 
     // Variables
 
-    private val _items = MutableStateFlow<SaleModel?>(null)
+    private val _items = MutableStateFlow<List<SaleGoodsModel>>(emptyList())
     val items = _items.asStateFlow()
 
-    private val _viewedItems = MutableStateFlow<LatestModel?>(null)
+    private val _viewedItems = MutableStateFlow<List<LatestGoodsModel>>(emptyList())
     val viewedItems = _viewedItems.asStateFlow()
 
     private val _hidePassword = MutableStateFlow(true)
     val hidePassword = _hidePassword.asStateFlow()
-
-    private val _goodsDetails = MutableStateFlow<GoodsDetailsModel?>(null)
-    val goodsDetails = _goodsDetails.asStateFlow()
-
-    private val _currentGoodsQuantity = MutableStateFlow(0)
-    val currentGoodsQuantity = _currentGoodsQuantity.asStateFlow()
-
-    private val _selectedColor = MutableStateFlow<String?>(null)
-    val selectedColor = _selectedColor.asStateFlow()
-
-    private val _selectedPicture = MutableStateFlow<String?>(null)
-    val selectedPicture = _selectedPicture.asStateFlow()
 
     private val _selectedUserPhoto = MutableStateFlow<Uri?>(null)
     val selectedUserPhoto = _selectedUserPhoto.asStateFlow()
 
     private val _searchResults = MutableStateFlow<ResultsModel?>(null)
     val searchResults = _searchResults.asStateFlow()
-
-    private val _selectedGoods = MutableStateFlow<String?>("")
-    val selectedGoods = _selectedGoods.asStateFlow()
 
     init {
         getSaleGoods()
@@ -76,13 +58,7 @@ class ShopViewModel @Inject constructor(
         }
     }
 
-    fun getGoodsDetails() {
-        viewModelScope.launch {
-            _goodsDetails.value = useCaseNetwork.getGoodsDetails()
-        }
-    }
-
-    private fun getSearchedResults(){
+    private fun getSearchedResults() {
         viewModelScope.launch {
             _searchResults.value = useCaseNetwork.getSearchResults()
         }
@@ -93,39 +69,24 @@ class ShopViewModel @Inject constructor(
     fun getAllViewedGoods(): Flow<List<ViewedGoodsModel>> = useCaseDataBase.getAllViewedGoods()
 
     suspend fun insertIntoViewedGoods(
-        category: String,
-        image_url: String,
-        name: String,
-        price: Double
+        viewedGoodsModel: ViewedGoodsModel
     ) {
         viewModelScope.launch {
             useCaseDataBase.insertIntoViewedGoods(
-                viewedGoodsModel = ViewedGoodsModel(
-                    category = category,
-                    image_url = image_url,
-                    name = name,
-                    price = price
-                )
+                viewedGoodsModel
             )
         }
     }
 
-    fun getAllFavoriteGoods(): Flow<List<FavoriteGoodsModel>> = useCaseDataBase.getAllFavoriteGoods()
+    fun getAllFavoriteGoods(): Flow<List<FavoriteGoodsModel>> =
+        useCaseDataBase.getAllFavoriteGoods()
 
     suspend fun insertIntoFavoriteGoods(
-        category: String?,
-        image_url: String?,
-        name: String,
-        price: Double
+        favoriteGoodsModel: FavoriteGoodsModel
     ) {
         viewModelScope.launch {
             useCaseDataBase.insertIntoFavoriteGoods(
-                favoriteGoodsModel = FavoriteGoodsModel(
-                    category = category,
-                    image_url = image_url,
-                    name = name,
-                    price = price
-                )
+                favoriteGoodsModel
             )
         }
     }
@@ -139,41 +100,8 @@ class ShopViewModel @Inject constructor(
         }
     }
 
-    fun incrementGoodsQuantity() {
-        viewModelScope.launch {
-            val currentQuantityStatus = _currentGoodsQuantity.value
-            _currentGoodsQuantity.value = currentQuantityStatus + 1
-        }
-    }
 
-    fun decrementGoodsQuantity() {
-        viewModelScope.launch {
-            val currentQuantityStatus = _currentGoodsQuantity.value
-            if (currentQuantityStatus > 0) {
-                _currentGoodsQuantity.value = currentQuantityStatus - 1
-            }
-        }
-    }
-
-    fun selectColor(color:String){
-        viewModelScope.launch {
-            _selectedColor.value = color
-        }
-    }
-
-    fun selectPicture(picture:String){
-        viewModelScope.launch {
-            _selectedPicture.value = picture
-        }
-    }
-
-    fun selectGoods(goodsName:String){
-        viewModelScope.launch {
-            _selectedGoods.value = goodsName
-        }
-    }
-
-    fun selectUserPhoto(uri: Uri){
+    fun selectUserPhoto(uri: Uri) {
         viewModelScope.launch {
             _selectedUserPhoto.value = uri
         }

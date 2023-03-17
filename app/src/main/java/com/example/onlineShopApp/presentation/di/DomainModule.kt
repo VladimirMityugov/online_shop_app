@@ -1,10 +1,10 @@
 package com.example.onlineShopApp.presentation.di
 
 
-import com.chocky_development.domain_.repositories.RepositoryLocal
-import com.chocky_development.domain_.repositories.RepositoryNetwork
-import com.chocky_development.domain_.use_cases.UseCaseDataBase
-import com.chocky_development.domain_.use_cases.UseCaseNetwork
+import com.chocky_development.domain.repositories.RepositoryLocal
+import com.chocky_development.domain.repositories.RepositoryNetwork
+import com.chocky_development.domain.use_cases.UseCaseDataBase
+import com.chocky_development.domain.use_cases.UseCaseNetwork
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

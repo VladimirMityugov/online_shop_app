@@ -5,11 +5,11 @@ import com.chocky_development.data.remote.mappers_remote.GoodsDetailsMapper
 import com.chocky_development.data.remote.mappers_remote.LatestGoodsMapper
 import com.chocky_development.data.remote.mappers_remote.SaleGoodsMapper
 import com.chocky_development.data.remote.mappers_remote.SearchResultMapper
-import com.chocky_development.domain_.models.goods_details_model.GoodsDetailsModel
-import com.chocky_development.domain_.models.latest_goods_model.LatestGoodsModel
-import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
-import com.chocky_development.domain_.models.search_result_model.ResultsModel
-import com.chocky_development.domain_.repositories.RepositoryNetwork
+import com.chocky_development.domain.models.goods_details_model.GoodsDetailsModel
+import com.chocky_development.domain.models.latest_goods_model.LatestGoodsModel
+import com.chocky_development.domain.models.sale_goods_model.SaleGoodsModel
+import com.chocky_development.domain.models.search_result_model.ResultsModel
+import com.chocky_development.domain.repositories.RepositoryNetwork
 
 
 class RepositoryNetworkImpl (

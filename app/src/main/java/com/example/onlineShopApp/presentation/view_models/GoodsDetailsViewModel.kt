@@ -2,10 +2,10 @@ package com.example.onlineShopApp.presentation.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.chocky_development.domain_.models.favorite_goods_model.FavoriteGoodsModel
-import com.chocky_development.domain_.models.goods_details_model.GoodsDetailsModel
-import com.chocky_development.domain_.use_cases.UseCaseDataBase
-import com.chocky_development.domain_.use_cases.UseCaseNetwork
+import com.chocky_development.domain.models.favorite_goods_model.FavoriteGoodsModel
+import com.chocky_development.domain.models.goods_details_model.GoodsDetailsModel
+import com.chocky_development.domain.use_cases.UseCaseDataBase
+import com.chocky_development.domain.use_cases.UseCaseNetwork
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

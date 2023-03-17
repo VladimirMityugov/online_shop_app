@@ -1,7 +1,7 @@
 package com.chocky_development.data.remote.mappers_remote
 
 import com.chocky_development.data.remote.latest_goods.LatestGoodsDto
-import com.chocky_development.domain_.models.latest_goods_model.LatestGoodsModel
+import com.chocky_development.domain.models.latest_goods_model.LatestGoodsModel
 
 
 class LatestGoodsMapper {

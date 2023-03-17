@@ -1,7 +1,7 @@
 package com.chocky_development.data.remote.mappers_remote
 
 import com.chocky_development.data.remote.goods_details.GoodsDetailsDto
-import com.chocky_development.domain_.models.goods_details_model.GoodsDetailsModel
+import com.chocky_development.domain.models.goods_details_model.GoodsDetailsModel
 
 
 class GoodsDetailsMapper {

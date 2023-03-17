@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.ItemBinding
-import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
+import com.chocky_development.domain.models.sale_goods_model.SaleGoodsModel
 
 
 class GoodsAdapter(

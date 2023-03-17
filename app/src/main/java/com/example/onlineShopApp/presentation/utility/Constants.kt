@@ -15,6 +15,8 @@ object Constants {
     const val TRANSLATION_VALUE_INITIAL_FOR_ANIMATION = 0F
     const val TRANSLATION_VALUE_FINAL_FOR_ANIMATION = 20F
     const val ELEVATION_VALUE_FOR_ANIMATION = 20F
+    const val BUNDLE = "BUNDLE"
+    const val GOODS_NAME = "GOODS_NAME"
     val REQUIRED_PERMISSIONS: Array<String> = buildList {
         add(Manifest.permission.READ_EXTERNAL_STORAGE)
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {

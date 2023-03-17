@@ -8,8 +8,8 @@ import com.chocky_development.data.local.dao.ShopDao
 import com.chocky_development.data.remote.ShopApi
 import com.chocky_development.data.repositories.RepositoryLocalImpl
 import com.chocky_development.data.repositories.RepositoryNetworkImpl
-import com.chocky_development.domain_.repositories.RepositoryLocal
-import com.chocky_development.domain_.repositories.RepositoryNetwork
+import com.chocky_development.domain.repositories.RepositoryLocal
+import com.chocky_development.domain.repositories.RepositoryNetwork
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

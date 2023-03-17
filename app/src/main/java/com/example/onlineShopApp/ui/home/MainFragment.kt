@@ -9,14 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.chocky_development.domain_.models.latest_goods_model.LatestGoodsModel
-import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
-import com.chocky_development.domain_.models.viewed_goods_model.ViewedGoodsModel
+import com.chocky_development.domain.models.latest_goods_model.LatestGoodsModel
+import com.chocky_development.domain.models.sale_goods_model.SaleGoodsModel
+import com.chocky_development.domain.models.viewed_goods_model.ViewedGoodsModel
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.FragmentMainBinding
 import com.example.onlineShopApp.presentation.view_models.ShopViewModel
@@ -25,11 +27,11 @@ import com.example.onlineShopApp.presentation.adapters.CategoriesAdapter
 import com.example.onlineShopApp.presentation.adapters.GoodsAdapter
 import com.example.onlineShopApp.presentation.adapters.ViewedGoodsAdapter
 import com.example.onlineShopApp.presentation.utility.CategoriesDataModel
+import com.example.onlineShopApp.presentation.utility.Constants.BUNDLE
+import com.example.onlineShopApp.presentation.utility.Constants.GOODS_NAME
 import com.example.onlineShopApp.presentation.utility.Constants.JACK_SPARROW_IMAGE_URL
-import com.example.onlineShopApp.presentation.view_models.GoodsDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -61,7 +63,6 @@ class MainFragment : Fragment() {
     )
 
     private val shopViewModel: ShopViewModel by activityViewModels()
-    private val goodsDetailsViewModel: GoodsDetailsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,7 +75,6 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val viewedRecyclerView = binding.latestRecyclerView
         val saleRecyclerView = binding.saleRecyclerView
         val categoriesRecyclerView = binding.categoriesRecyclerView
@@ -245,7 +245,7 @@ class MainFragment : Fragment() {
     }
 
     private fun onSaleItemClick(goods: SaleGoodsModel) {
-        goodsDetailsViewModel.selectGoods(goods.name)
+        setFragmentResult(BUNDLE, bundleOf(GOODS_NAME to goods.name))
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             shopViewModel.insertIntoViewedGoods(
                ViewedGoodsModel(

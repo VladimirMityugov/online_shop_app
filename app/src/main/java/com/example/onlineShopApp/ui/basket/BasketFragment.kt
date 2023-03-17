@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
+import com.chocky_development.domain.models.sale_goods_model.SaleGoodsModel
 import com.chocky_development.onlineShopApp.databinding.FragmentBasketBinding
 import com.example.onlineShopApp.presentation.view_models.ShopViewModel
 

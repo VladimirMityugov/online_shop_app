@@ -1,7 +1,7 @@
 package com.chocky_development.data.local.mappers_local
 
 import com.chocky_development.data.local.entities.ViewedGoods
-import com.chocky_development.domain_.models.viewed_goods_model.ViewedGoodsModel
+import com.chocky_development.domain.models.viewed_goods_model.ViewedGoodsModel
 
 
 class ViewedGoodsMapper {

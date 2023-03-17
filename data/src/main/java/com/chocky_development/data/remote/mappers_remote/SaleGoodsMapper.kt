@@ -1,7 +1,7 @@
 package com.chocky_development.data.remote.mappers_remote
 
 import com.chocky_development.data.remote.sale_goods.SaleGoodsDto
-import com.chocky_development.domain_.models.sale_goods_model.SaleGoodsModel
+import com.chocky_development.domain.models.sale_goods_model.SaleGoodsModel
 
 
 class SaleGoodsMapper {

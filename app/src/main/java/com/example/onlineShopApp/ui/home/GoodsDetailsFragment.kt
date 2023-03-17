@@ -9,12 +9,15 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.chocky_development.domain_.models.favorite_goods_model.FavoriteGoodsModel
+import com.chocky_development.domain.models.favorite_goods_model.FavoriteGoodsModel
 import com.chocky_development.onlineShopApp.R
 import com.chocky_development.onlineShopApp.databinding.FragmentGoodsDetailsBinding
 import com.example.onlineShopApp.presentation.adapters.GoodsPicturesAdapter
+import com.example.onlineShopApp.presentation.utility.Constants.BUNDLE
+import com.example.onlineShopApp.presentation.utility.Constants.GOODS_NAME
 import com.example.onlineShopApp.presentation.view_models.GoodsDetailsViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -24,11 +27,21 @@ class GoodsDetailsFragment : Fragment() {
     private var _binding: FragmentGoodsDetailsBinding? = null
     private val binding get() = _binding!!
 
+    private var goodsName: String? = null
+
     private val goodsPicturesAdapter = GoodsPicturesAdapter(
         onPictureClick = { picture -> onGoodsPictureClick(picture) }
     )
 
-private val goodsDetailsViewModel: GoodsDetailsViewModel by activityViewModels()
+    private val goodsDetailsViewModel: GoodsDetailsViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener(BUNDLE) { _, bundle ->
+            goodsName = bundle.getString(GOODS_NAME)
+            if(goodsName!=null)goodsDetailsViewModel.getGoodsDetails()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,11 +84,11 @@ private val goodsDetailsViewModel: GoodsDetailsViewModel by activityViewModels()
             onAddToCartButtonClick()
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            goodsDetailsViewModel.selectedGoods.collectLatest {goodsName ->
-                if(goodsName!=null)goodsDetailsViewModel.getGoodsDetails()
-            }
-        }
+//        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+//            goodsDetailsViewModel.selectedGoods.collectLatest { goodsName ->
+//                if (goodsName != null) goodsDetailsViewModel.getGoodsDetails()
+//            }
+//        }
 
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {

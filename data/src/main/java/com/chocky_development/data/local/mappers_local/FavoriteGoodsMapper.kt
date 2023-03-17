@@ -1,7 +1,7 @@
 package com.chocky_development.data.local.mappers_local
 
 import com.chocky_development.data.local.entities.FavoriteGoods
-import com.chocky_development.domain_.models.favorite_goods_model.FavoriteGoodsModel
+import com.chocky_development.domain.models.favorite_goods_model.FavoriteGoodsModel
 
 
 class FavoriteGoodsMapper {

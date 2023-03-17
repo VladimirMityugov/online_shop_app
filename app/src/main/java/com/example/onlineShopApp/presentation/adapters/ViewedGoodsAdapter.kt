@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.chocky_development.domain_.models.latest_goods_model.LatestGoodsModel
+import com.chocky_development.domain.models.latest_goods_model.LatestGoodsModel
 import com.chocky_development.onlineShopApp.databinding.ViewedItemBinding
 
 

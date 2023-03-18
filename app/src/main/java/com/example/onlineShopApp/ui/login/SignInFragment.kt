@@ -34,8 +34,6 @@ class SignInFragment : Fragment() {
     private lateinit var authentification: FirebaseAuth
     private lateinit var username: String
 
-    private val viewModel: ShopViewModel by activityViewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

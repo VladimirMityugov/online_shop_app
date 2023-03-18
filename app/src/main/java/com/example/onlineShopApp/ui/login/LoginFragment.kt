@@ -4,6 +4,7 @@ package com.example.onlineShopApp.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +17,10 @@ import com.example.onlineShopApp.presentation.view_models.ShopViewModel
 import com.example.onlineShopApp.presentation.utility.Constants.PASSWORD
 import com.example.onlineShopApp.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
@@ -70,10 +72,26 @@ class LoginFragment : Fragment() {
         binding.loginButton.setOnClickListener {
             val name =
                 firstName.text.toString()
-            onLoginButtonCLick(name, PASSWORD)
-
+            when {
+                name.isEmpty() ->
+                    Toast.makeText(
+                        requireContext(),
+                        "Please, enter name",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                password.text.toString().isEmpty() ->
+                    Toast.makeText(
+                        requireContext(),
+                        "Please, enter password",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                else -> {
+                    onLoginButtonCLick(
+                        email = name,
+                        password = PASSWORD)
+                }
+            }
         }
-
     }
 
     private fun onLoginButtonCLick(email: String, password: String) {
